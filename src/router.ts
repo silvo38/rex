@@ -24,8 +24,8 @@ interface MatchedHandler {
  *
  * ```
  * const router = new Router()
- *   .add({ path: '/home', handler: homeHandler })
- *   .add({ path: '/post/:id', handler: postHandler });
+ *   .add({ route: '/home', handler: homeHandler })
+ *   .add({ route: '/post/:id', handler: postHandler });
  * ```
  */
 export class Router {
@@ -34,7 +34,7 @@ export class Router {
   /** Adds an new route to the router. */
   add(handler: Handler) {
     const method = handler.method ?? Method.Get;
-    let pattern = handler.path;
+    let pattern = handler.route;
     if (typeof pattern === "string") {
       pattern = new URLPattern({ pathname: pattern });
     }

@@ -8,8 +8,8 @@ describe("StaticFileHandler", () => {
   it("returns the file on disc", async () => {
     const server = new Server().addHandler(
       new StaticFileHandler({
-        path: "/abc",
-        filesystemPath: "./src/testdata/hello.txt",
+        route: "/abc",
+        path: "./src/testdata/hello.txt",
         contentType: "content-type",
       }),
     );

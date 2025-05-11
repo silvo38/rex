@@ -5,7 +5,7 @@ import { Responses } from "./response.ts";
 import type { Handler } from "./handler.ts";
 
 class FakeHandler implements Handler {
-  path = "/abc";
+  readonly route = "/abc";
   handle() {
     return Responses.ok();
   }
@@ -29,7 +29,7 @@ describe("Router", () => {
 
   it("supports relative paths as URLPatterns", () => {
     const handler: Handler = {
-      path: new URLPattern({ pathname: "/post/:id" }),
+      route: new URLPattern({ pathname: "/post/:id" }),
       handle: () => Responses.ok(),
     };
     router.add(handler);
@@ -52,7 +52,7 @@ describe("Router", () => {
 
   it("getHandler returns the match result", () => {
     const handler: Handler = {
-      path: new URLPattern({ pathname: "/post/:id" }),
+      route: new URLPattern({ pathname: "/post/:id" }),
       handle: () => Responses.ok(),
     };
     router.add(handler);

@@ -40,15 +40,14 @@ interface MatchedRoute {
 export class Router {
   private readonly routes: InternalRouteDefinition[] = [];
 
-  constructor(routes: Routes) {
-    this.routes = routes.map((route) => {
-      const method = route.method ?? Method.Get;
-      let pattern = route.path;
-      if (typeof pattern === "string") {
-        pattern = new URLPattern({ pathname: pattern });
-      }
-      return { method, pattern, handler: route.handler };
-    });
+  /** Adds an new route to the router. */
+  add(route: Route) {
+    const method = route.method ?? Method.Get;
+    let pattern = route.path;
+    if (typeof pattern === "string") {
+      pattern = new URLPattern({ pathname: pattern });
+    }
+    this.routes.push({ method, pattern, handler: route.handler });
   }
 
   /** Returns the first handler that matches the given path. */

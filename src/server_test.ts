@@ -13,11 +13,11 @@ describe("Server", () => {
   let server: Server;
 
   beforeEach(() => {
-    server = new Server([]);
+    server = new Server();
   });
 
   it("invokes correct handler", async () => {
-    server.setRoutes([
+    server.addRoutes([
       { path: "/abc", handler: () => new Response("hello") },
       { path: "/xyz", handler: () => new Response("world") },
     ]);
@@ -28,15 +28,13 @@ describe("Server", () => {
 
   it("wraps request and forwards to handler", async () => {
     let requestReceived: RexRequest | undefined = undefined;
-    server.setRoutes([
-      {
-        path: "/post/:id",
-        handler: (request: RexRequest) => {
-          requestReceived = request;
-          return new Response();
-        },
+    server.addRoute({
+      path: "/post/:id",
+      handler: (request: RexRequest) => {
+        requestReceived = request;
+        return new Response();
       },
-    ]);
+    });
 
     const response = await server.handle(
       new Request("http://example.com/post/abc"),
@@ -52,5 +50,18 @@ describe("Server", () => {
   it("returns 404 for missing routes", async () => {
     const response = await server.handle(new Request("http://example.com/abc"));
     assertStatus(response, Status.NotFound);
+  });
+
+  it("routes added earlier take priority", async () => {
+    server
+      .addRoute({ path: "/abc", handler: () => new Response("hello") })
+      .addRoute({ path: "/abc", handler: () => new Response("world") });
+
+    const response = await server.handle(
+      new Request("http://example.com/abc"),
+    );
+
+    assertOk(response);
+    assertStrictEquals(await response.text(), "hello");
   });
 });

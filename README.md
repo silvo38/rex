@@ -20,14 +20,14 @@ function getPost(request: RexRequest): RexResponse {
   return new Response(`This is post ${request.params.id}`);
 }
 
+const server = new Server();
+
 // Define all of your routes. You can use a mixture of path strings (with slugs)
 // or provide your own URLPattern instances.
-const routes: Routes = [
+server.addRoutes([
   { path: "/home", handler: renderHomePage },
   { path: "/post/:id", handler: getPost },
-];
-
-const server = new Server(routes);
+]);
 
 Deno.serve((request) => server.handle(request));
 ```

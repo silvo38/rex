@@ -1,6 +1,4 @@
-// import { renderToString } from "preact-render-to-string";
-// import { ExampleComponent } from "./ExampleComponent.tsx";
-import { Router, type Routes } from "./router.ts";
+import { type Route, Router, type Routes } from "./router.ts";
 import { Responses } from "./response.ts";
 import { RexRequest } from "./request.ts";
 
@@ -9,21 +7,25 @@ import { RexRequest } from "./request.ts";
  * method, and then call `serve()`.
  */
 export class Server {
-  private router: Router;
+  private readonly router: Router;
 
-  constructor(routes: Routes) {
-    this.router = new Router(routes);
+  constructor() {
+    this.router = new Router();
   }
 
-  setRoutes(routes: Routes): Server {
-    this.router = new Router(routes);
+  /** Defines a new route. */
+  addRoute(route: Route): Server {
+    this.router.add(route);
     return this;
   }
 
-  // serve() {
-  //   Deno.serve((request) => this.handle(request));
-  //   //   return new Response(renderToString(ExampleComponent()));
-  // }
+  /** Defines multiple new routes. */
+  addRoutes(routes: Routes): Server {
+    for (const route of routes) {
+      this.addRoute(route);
+    }
+    return this;
+  }
 
   handle(request: Request): Response | Promise<Response> {
     const route = this.router.getHandler(request.url);

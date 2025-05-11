@@ -3,7 +3,6 @@ import { Status } from "./status.ts";
 
 /** Wrapper around the native Response class, with some convenience methods. */
 export class RexResponse extends Response {
-
   /** Returns the value of the Content-Type header. */
   getContentType(): string | null {
     return this.headers.get(Header.ContentType);

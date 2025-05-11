@@ -10,7 +10,7 @@ APIs where feasible (perhaps with a few extra additions for convenience).
 ## Basic usage
 
 ```tsx
-import { RexRequest, Routes, Server, renderHtml } from "rex";
+import { renderHtml, RexRequest, Routes, Server } from "rex";
 
 function renderHomePage() {
   return renderHtml(<h1>Home page</h1>);

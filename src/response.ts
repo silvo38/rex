@@ -17,7 +17,7 @@ export class RexResponse extends Response {
 
 /** Helpers for constructing standard HTTP responses. */
 export abstract class Responses {
-  static badRequest(message?: string) {
+  static badRequest(message?: string): Response {
     return new Response(
       createErrorMessage(Status.BadRequest, "Bad Request", message),
       {
@@ -26,14 +26,14 @@ export abstract class Responses {
     );
   }
 
-  static seeOther(location: string) {
+  static seeOther(location: string): Response {
     return new Response("", {
       status: Status.SeeOther,
       headers: { "location": location },
     });
   }
 
-  static notFound(message?: string) {
+  static notFound(message?: string): Response {
     return new Response(
       createErrorMessage(Status.NotFound, "Not Found", message),
       {
@@ -42,7 +42,7 @@ export abstract class Responses {
     );
   }
 
-  static json(data: unknown) {
+  static json(data: unknown): Response {
     return new Response(JSON.stringify(data), {
       status: Status.Ok,
       headers: {
@@ -51,7 +51,7 @@ export abstract class Responses {
     });
   }
 
-  static ok() {
+  static ok(): Response {
     return new Response("", { status: Status.Ok });
   }
 }
@@ -60,7 +60,7 @@ function createErrorMessage(
   status: Status,
   statusText: string,
   message?: string,
-) {
+): string {
   if (message) {
     return `${status} ${statusText}: ${message}`;
   } else {

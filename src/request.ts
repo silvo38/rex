@@ -23,7 +23,7 @@ export class RexRequest extends Request {
    * Creates a new instance. Requires the initial Request instance, and the
    * result of matching the request against a route.
    */
-  static create(request: Request, match?: URLPatternResult) {
+  static create(request: Request, match?: URLPatternResult): RexRequest {
     return new RexRequest(request, match?.pathname?.groups ?? {});
   }
 }

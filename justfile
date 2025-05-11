@@ -1,7 +1,7 @@
 test:
-  deno test
+  deno test --allow-read
 
-fmt:
+fix:
   deno fmt
   deno lint --fix
 

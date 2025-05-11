@@ -1,5 +1,5 @@
 import { render } from "preact-render-to-string";
-import { VNode } from "preact";
+import type { VNode } from "preact";
 import { ContentType } from "./header.ts";
 import { RexResponse } from "./response.ts";
 

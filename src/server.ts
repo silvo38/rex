@@ -1,6 +1,6 @@
 // import { renderToString } from "preact-render-to-string";
 // import { ExampleComponent } from "./ExampleComponent.tsx";
-import { Router, Routes } from "./router.ts";
+import { Router, type Routes } from "./router.ts";
 import { Responses } from "./response.ts";
 import { RexRequest } from "./request.ts";
 

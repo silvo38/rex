@@ -1,4 +1,4 @@
-import { Handler } from "./handler.ts";
+import type { Handler } from "./handler.ts";
 import { Method } from "./method.ts";
 
 export interface Route {

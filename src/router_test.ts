@@ -1,7 +1,7 @@
 import { describe, it } from "@std/testing/bdd";
 import { assertEquals, assertStrictEquals } from "@std/assert";
 import { Router } from "./router.ts";
-import { RexRequest } from "./request.ts";
+import type { RexRequest } from "./request.ts";
 import { Responses } from "./response.ts";
 
 function fakeHandler1(_request: RexRequest) {

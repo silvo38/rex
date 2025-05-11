@@ -1,5 +1,5 @@
 import { assert, assertStrictEquals } from "@std/assert";
-import { Status } from "../status.ts";
+import type { Status } from "../status.ts";
 
 export function assertOk(response: Response) {
   assert(response.ok);

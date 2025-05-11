@@ -1,16 +1,18 @@
 import { beforeEach, describe, it } from "@std/testing/bdd";
 import { assertEquals, assertStrictEquals } from "@std/assert";
 import { Router } from "./router.ts";
-import type { RexRequest } from "./request.ts";
 import { Responses } from "./response.ts";
+import type { Handler } from "./handler.ts";
 
-function fakeHandler1(_request: RexRequest) {
-  return Responses.ok();
+class FakeHandler implements Handler {
+  path = "/abc";
+  handle() {
+    return Responses.ok();
+  }
 }
 
-function fakeHandler2(_request: RexRequest) {
-  return Responses.ok();
-}
+const fakeHandler1 = new FakeHandler();
+const fakeHandler2 = new FakeHandler();
 
 describe("Router", () => {
   let router: Router;
@@ -20,40 +22,42 @@ describe("Router", () => {
   });
 
   it("supports relative paths as strings", () => {
-    router.add({ path: "/abc", handler: fakeHandler1 });
+    router.add(fakeHandler1);
     const result = router.getHandler("http://example.com/abc");
     assertStrictEquals(result?.handler, fakeHandler1);
   });
 
   it("supports relative paths as URLPatterns", () => {
-    router.add({
+    const handler: Handler = {
       path: new URLPattern({ pathname: "/post/:id" }),
-      handler: fakeHandler1,
-    });
+      handle: () => Responses.ok(),
+    };
+    router.add(handler);
     const result = router.getHandler("http://example.com/post/123");
-    assertStrictEquals(result?.handler, fakeHandler1);
+    assertStrictEquals(result?.handler, handler);
   });
 
   it("getHandler returns null if there is no matching route", () => {
-    router.add({ path: "/abc", handler: fakeHandler1 });
+    router.add(fakeHandler1);
     const result = router.getHandler("http://example.com/xyz");
     assertStrictEquals(result, null);
   });
 
   it("getHandler returns the first matching handler", () => {
-    router.add({ path: "/abc", handler: fakeHandler1 });
-    router.add({ path: "/abc", handler: fakeHandler2 });
+    router.add(fakeHandler1);
+    router.add(fakeHandler2);
     const result = router.getHandler("http://example.com/abc");
     assertStrictEquals(result?.handler, fakeHandler1);
   });
 
   it("getHandler returns the match result", () => {
-    router.add({
+    const handler: Handler = {
       path: new URLPattern({ pathname: "/post/:id" }),
-      handler: fakeHandler1,
-    });
+      handle: () => Responses.ok(),
+    };
+    router.add(handler);
     const result = router.getHandler("http://example.com/post/123");
-    assertStrictEquals(result?.handler, fakeHandler1);
+    assertStrictEquals(result?.handler, handler);
     assertStrictEquals(result?.route.hostname.input, "example.com");
     assertStrictEquals(result?.route.pathname.input, "/post/123");
     assertEquals(result?.route.pathname.groups, { id: "123" });

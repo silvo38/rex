@@ -1,6 +1,7 @@
-import { type Route, Router, type Routes } from "./router.ts";
+import { Router } from "./router.ts";
 import { Responses } from "./response.ts";
 import { RexRequest } from "./request.ts";
+import type { Handler } from "./handler.ts";
 
 /**
  * Main server entry point. Create routes with handlers using the `setRoutes`
@@ -14,15 +15,15 @@ export class Server {
   }
 
   /** Defines a new route. */
-  addRoute(route: Route): Server {
-    this.router.add(route);
+  addHandler(handler: Handler): Server {
+    this.router.add(handler);
     return this;
   }
 
   /** Defines multiple new routes. */
-  addRoutes(routes: Routes): Server {
-    for (const route of routes) {
-      this.addRoute(route);
+  addHandlers(handlers: Iterable<Handler>): Server {
+    for (const handler of handlers) {
+      this.addHandler(handler);
     }
     return this;
   }
@@ -36,6 +37,6 @@ export class Server {
 
     const requestWrapper = RexRequest.create(request, route.route);
     // TODO: Catch errors?
-    return route.handler(requestWrapper);
+    return route.handler.handle(requestWrapper);
   }
 }

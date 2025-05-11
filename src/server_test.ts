@@ -17,9 +17,9 @@ describe("Server", () => {
   });
 
   it("invokes correct handler", async () => {
-    server.addRoutes([
-      { path: "/abc", handler: () => new Response("hello") },
-      { path: "/xyz", handler: () => new Response("world") },
+    server.addHandlers([
+      { path: "/abc", handle: () => new Response("hello") },
+      { path: "/xyz", handle: () => new Response("world") },
     ]);
     const response = await server.handle(new Request("http://example.com/abc"));
     assertOk(response);
@@ -28,9 +28,9 @@ describe("Server", () => {
 
   it("wraps request and forwards to handler", async () => {
     let requestReceived: RexRequest | undefined = undefined;
-    server.addRoute({
+    server.addHandler({
       path: "/post/:id",
-      handler: (request: RexRequest) => {
+      handle: (request: RexRequest) => {
         requestReceived = request;
         return new Response();
       },
@@ -54,8 +54,8 @@ describe("Server", () => {
 
   it("routes added earlier take priority", async () => {
     server
-      .addRoute({ path: "/abc", handler: () => new Response("hello") })
-      .addRoute({ path: "/abc", handler: () => new Response("world") });
+      .addHandler({ path: "/abc", handle: () => new Response("hello") })
+      .addHandler({ path: "/abc", handle: () => new Response("world") });
 
     const response = await server.handle(
       new Request("http://example.com/abc"),

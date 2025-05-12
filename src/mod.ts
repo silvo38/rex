@@ -1,3 +1,4 @@
+export * from "./content_type.ts";
 export * from "./handler.ts";
 export * from "./header.ts";
 export * from "./method.ts";
@@ -6,4 +7,5 @@ export * from "./request.ts";
 export * from "./response.ts";
 export * from "./router.ts";
 export * from "./server.ts";
+export * from "./static.ts";
 export * from "./status.ts";

@@ -1,4 +1,5 @@
-import { type ContentType, Header } from "./header.ts";
+import type { ContentType } from "./content_type.ts";
+import { Header } from "./header.ts";
 import { Status } from "./status.ts";
 
 /** Wrapper around the native Response class, with some convenience methods. */

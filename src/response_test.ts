@@ -1,6 +1,6 @@
 import { describe, it } from "@std/testing/bdd";
 import { RexResponse } from "./response.ts";
-import { ContentType } from "./header.ts";
+import { ContentType } from "./content_type.ts";
 import { assertStrictEquals } from "@std/assert/strict-equals";
 
 describe("RexResponse", () => {

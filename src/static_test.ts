@@ -1,27 +1,24 @@
 import { describe, it } from "@std/testing/bdd";
 import { StaticDirectoryHandler, StaticFileHandler } from "./static.ts";
-import { Server } from "./server.ts";
 import { assertStrictEquals, assertThrows } from "@std/assert";
-import { assertOk } from "./testing/assert.ts";
+import { assertContentType, assertOk } from "./testing/assert.ts";
 import { Header } from "./header.ts";
 import { ContentType } from "./content_type.ts";
+import { testHandler } from "./testing/test_server.ts";
 
 describe("StaticFileHandler", () => {
   it("returns the file on disc", async () => {
-    const server = new Server().addHandler(
+    const response = await testHandler(
       new StaticFileHandler({
         route: "/abc",
         path: "./src/testdata/hello.txt",
         contentType: "content-type",
       }),
+      "/abc",
     );
-    const response = await server.handle(new Request("http://example.com/abc"));
     assertOk(response);
     assertStrictEquals(await response.text(), "Hello\n");
-    assertStrictEquals(
-      response.headers.get(Header.ContentType),
-      "content-type",
-    );
+    assertContentType(response, "content-type");
   });
 
   it("checks file existence on creation", () => {
@@ -34,46 +31,38 @@ describe("StaticFileHandler", () => {
   });
 
   it("infers content type", async () => {
-    const server = new Server().addHandler(
+    const response = await testHandler(
       new StaticFileHandler({
         route: "/abc",
         path: "./src/testdata/hello.html",
       }),
+      "/abc",
     );
-    const response = await server.handle(new Request("http://example.com/abc"));
     assertOk(response);
-    assertStrictEquals(
-      response.headers.get(Header.ContentType),
-      ContentType.Html,
-    );
+    assertContentType(response, ContentType.Html);
   });
 });
 
 describe("StaticDirectoryHandler", () => {
   it("can serve multiple files", async () => {
-    const server = new Server().addHandler(
-      new StaticDirectoryHandler({
-        route: "/abc/*",
-        directory: "./src/testdata",
-      }),
-    );
+    const handler = new StaticDirectoryHandler({
+      route: "/abc/*",
+      directory: "./src/testdata",
+    });
 
-    const response1 = await server.handle(
-      new Request("http://example.com/abc/hello.html"),
-    );
+    const response1 = await testHandler(handler, "/abc/hello.html");
     assertOk(response1);
     assertStrictEquals(await response1.text(), "<h1>Hello</h1>\n");
+    assertContentType(response1, ContentType.Html);
     assertStrictEquals(
       response1.headers.get(Header.ContentType),
       ContentType.Html,
     );
 
-    const response2 = await server.handle(
-      new Request("http://example.com/abc/hello.txt"),
-    );
+    const response2 = await testHandler(handler, "/abc/hello.txt");
     assertOk(response2);
     assertStrictEquals(await response2.text(), "Hello\n");
-    assertStrictEquals(response2.headers.get(Header.ContentType), null);
+    assertContentType(response2, null);
   });
 
   it("checks directory existence on creation", () => {

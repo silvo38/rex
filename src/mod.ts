@@ -2,6 +2,7 @@ export * from "./content_type.ts";
 export * from "./handler.ts";
 export * from "./header.ts";
 export * from "./method.ts";
+export * from "./page_handler.ts";
 export * from "./render.ts";
 export * from "./request.ts";
 export * from "./response.ts";

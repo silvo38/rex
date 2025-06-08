@@ -2,10 +2,10 @@
  * Ningen build defs file, providing helper functions for running the Tailwind
  * compiler on your CSS. Import from your BUILD.ts file.
  */
-import { glob, rule } from "jsr:@silvo38/ningen@^0.0.8";
+import { type BuildFn, glob, rule } from "jsr:@silvo38/ningen@^0.0.8";
 
 /** Ningen build rule for invoking the Tailwind compiler on a CSS file. */
-export const tailwind = rule({
+export const tailwind: BuildFn = rule({
   name: "tailwind",
   cmd: "deno run -A npm:@tailwindcss/cli@^4.1.7 --input $in --output $out",
   desc: "Generating Tailwind CSS",

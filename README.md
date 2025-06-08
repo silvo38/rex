@@ -147,6 +147,19 @@ tailwind:
     --output static/styles.gen.css
 ```
 
+If you are using the [Ningen](http://github.com/silvo38/ningen) build system,
+there is a `tailwind` build rule provided in `src/build_defs.ts` that you can
+import which will do this for you:
+
+```ts
+import { tailwind } from "jsr:@silvo38/rex/build_defs.ts";
+
+tailwind({
+  srcs: "static/styles.css",
+  out: "static/styles.gen.css",
+});
+```
+
 This would generate `styles.gen.css`, which you would load in your page. Don't
 forget to serve the CSS file using a `StaticFileHandler`.
 

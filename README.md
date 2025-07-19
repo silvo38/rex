@@ -152,7 +152,7 @@ there is a `tailwind` build rule provided in `src/build_defs.ts` that you can
 import which will do this for you:
 
 ```ts
-import { tailwind } from "jsr:@silvo38/rex/build_defs.ts";
+import { tailwind } from "jsr:@silvo38/rex@^0.3.0/build_defs.ts";
 
 tailwind({
   srcs: "static/styles.css",

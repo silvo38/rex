@@ -1,4 +1,4 @@
-import { RexRequest } from "rex";
+import type { RexRequest } from "rex";
 import { ExampleBasePage } from "./ExampleBasePage.tsx";
 
 /** Handler for the home page, served at `/`. */

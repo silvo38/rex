@@ -1,5 +1,5 @@
 import { PageHandler } from "rex";
-import { VNode } from "preact";
+import type { VNode } from "preact";
 
 /** Base page template applied to all HTML pages in this server. */
 export abstract class ExampleBasePage extends PageHandler {

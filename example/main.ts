@@ -1,4 +1,4 @@
-import { Server, StaticDirectoryHandler, StaticFileHandler } from "rex";
+import { Server, StaticDirectoryHandler } from "rex";
 import { HomePage } from "./pages/HomePage.tsx";
 
 const server = new Server()
@@ -11,12 +11,10 @@ const server = new Server()
     }),
   )
   // Serve the generated CSS file as /styles.css.
-  .addHandler(
-    new StaticFileHandler({
-      route: "/styles.css",
-      path: "static/styles.gen.css",
-    }),
-  );
+  .serveFile("/styles.css", "static/styles.gen.css")
+  // Serve the bundled JS file (and sourcemap).
+  .serveFile("/app.js", "/dist/app.js")
+  .serveFile("/app.js.map", "/dist/app.js.map");
 
 // Start the Deno HTTP server, and forward all requests to your Rex server.
 Deno.serve((request) => server.handle(request));

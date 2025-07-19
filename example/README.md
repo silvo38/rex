@@ -8,3 +8,4 @@ showcases the following features:
 - **Justfile and Ningen:** the Ningen build system and the Just command runner
   are all hooked up.
 - **Tailwind:** generates CSS
+- **Bundling and serving client JS:** bundle TypeScript to JS using esbuild

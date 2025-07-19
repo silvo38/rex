@@ -13,3 +13,14 @@ export const tailwind: BuildFn = rule({
   // CSS to be regenerated.
   deps: glob("**/*.tsx"),
 });
+
+/**
+ * Ningen build rule for invoking the esbuild bundler. Use `srcs` for your
+ * entrypoint script, and `out` for your output JS file. A `.map` sourcemap file
+ * will also be generated.
+ */
+export const esbuild: BuildFn = rule({
+  name: "esbuild",
+  cmd: "deno run -A npm:esbuild --bundle --sourcemap $in --outfile=$out",
+  desc: "Bundling JS with esbuild",
+});

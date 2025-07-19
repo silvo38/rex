@@ -1,4 +1,9 @@
+rule esbuild
+  command = deno run -A npm:esbuild --bundle --sourcemap $in --outfile=$out
+
 rule tailwind
   command = deno run -A npm:@tailwindcss/cli@^4.1.7 --input $in --output $out
+
+build dist/app.js: esbuild client/app.ts | client client/app.ts client/library.ts
 
 build static/styles.gen.css: tailwind static/styles.css | pages/ExampleBasePage.tsx pages/HomePage.tsx

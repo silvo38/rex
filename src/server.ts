@@ -2,6 +2,7 @@ import { Router } from "./router.ts";
 import { Responses } from "./response.ts";
 import { RexRequest } from "./request.ts";
 import type { Handler } from "./handler.ts";
+import { StaticFileHandler } from "./static.ts";
 
 /**
  * Main server entry point. Create routes with handlers using the `setRoutes`
@@ -25,6 +26,12 @@ export class Server {
     for (const handler of handlers) {
       this.addHandler(handler);
     }
+    return this;
+  }
+
+  /** Serves the file with the given path on disk at the specified route. */
+  serveFile(route: string, path: string): Server {
+    this.addHandler(new StaticFileHandler({ route, path }));
     return this;
   }
 

@@ -1,3 +1,4 @@
-.ninja_log
+dist
 node_modules
+.ninja_log
 *.gen.*

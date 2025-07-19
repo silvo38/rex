@@ -1,6 +1,6 @@
 import { beforeEach, describe, it } from "@std/testing/bdd";
 import { Server } from "./server.ts";
-import { assertOk, assertStatus } from "./testing/assert.ts";
+import { assertContentType, assertOk, assertStatus } from "./testing/assert.ts";
 import { Status } from "./status.ts";
 import {
   assertEquals,
@@ -8,6 +8,7 @@ import {
   assertStrictEquals,
 } from "@std/assert";
 import { RexRequest } from "./request.ts";
+import { ContentType } from "./content_type.ts";
 
 describe("Server", () => {
   let server: Server;
@@ -63,5 +64,16 @@ describe("Server", () => {
 
     assertOk(response);
     assertStrictEquals(await response.text(), "hello");
+  });
+
+  it("serveFile works", async () => {
+    server.serveFile("/abc", "./src/testdata/hello.html");
+
+    const response = await server.handle(
+      new Request("http://example.com/abc"),
+    );
+
+    assertOk(response);
+    assertContentType(response, ContentType.Html);
   });
 });

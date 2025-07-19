@@ -80,6 +80,12 @@ serve a different file at `/fonts/Roboto.ttf`, make sure you add a
 `StaticFileHandler` for that route first, before adding a handler for
 `/fonts/*`).
 
+For convenience, you can use the helper method instead:
+
+```ts
+server.serveFile("/logo.svg", "static/logo.svg");
+```
+
 ## Rendering HTML
 
 Rex uses Preact to render JSX components as HTML. For this, define a subclass of
@@ -131,6 +137,18 @@ class HomePage extends MyBasePage {
 
 ## Optional/recommended dependencies
 
+### Ningen
+
+The [Ningen](http://github.com/silvo38/ningen) build system is a convenient way
+to compile JS/CSS files for your server. There are helper functions defined in
+`src/build_defs.ts` to make it easy to run Tailwind and esbuild.
+
+Import them from your `BUILD.ts` file:
+
+```ts
+import { esbuild, tailwind } from "jsr:@silvo38/rex@^0.0.3/build_defs.ts";
+```
+
 ### Tailwind
 
 There is no special integration of Tailwind in Rex; however, it is very easy to
@@ -147,12 +165,11 @@ tailwind:
     --output static/styles.gen.css
 ```
 
-If you are using the [Ningen](http://github.com/silvo38/ningen) build system,
-there is a `tailwind` build rule provided in `src/build_defs.ts` that you can
-import which will do this for you:
+If you are using the build system, there is a `tailwind` build rule provided in
+`src/build_defs.ts` that you can import which will do this for you:
 
 ```ts
-import { tailwind } from "jsr:@silvo38/rex@^0.3.0/build_defs.ts";
+import { tailwind } from "jsr:@silvo38/rex@^0.0.3/build_defs.ts";
 
 tailwind({
   srcs: "static/styles.css",
@@ -161,7 +178,25 @@ tailwind({
 ```
 
 This would generate `styles.gen.css`, which you would load in your page. Don't
-forget to serve the CSS file using a `StaticFileHandler`.
+forget to serve the CSS file using a `StaticFileHandler` or `serveFile`.
+
+### Bundling and serving client-side JavaScript
+
+Use [esbuild](https://esbuild.github.io) to bundle your client JS. Point it at
+the "entrypoint" file, and generate an output file, like so:
+
+```ts
+import { esbuild } from "jsr:@silvo38/rex@^0.0.3/build_defs.ts";
+
+esbuild({
+  srcs: "client/app.ts",
+  out: ["dist/app.js"],
+  deps: glob("client/**"),
+});
+```
+
+This will generate `dist/app.js` and `dist/app.js.map`, which you can serve from
+your server.
 
 ### Dependency injection
 

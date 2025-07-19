@@ -10,6 +10,7 @@ export abstract class ExampleBasePage extends PageHandler {
           <title>Rex Example Server</title>
           <link rel="shortcut icon" href="/icons/dog.png" type="image/png" />
           <link href="/styles.css" rel="stylesheet" />
+          <script src="/app.js" defer />
         </head>
         <body>{component}</body>
       </html>

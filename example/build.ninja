@@ -1,0 +1,4 @@
+rule tailwind
+  command = deno run -A npm:@tailwindcss/cli@^4.1.7 --input $in --output $out
+
+build static/styles.gen.css: tailwind static/styles.css | pages/ExampleBasePage.tsx pages/HomePage.tsx

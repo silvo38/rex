@@ -1,0 +1,16 @@
+list:
+  just --list
+
+# Runs the deno server. Will automatically restart whenever a file used by the
+# server changes.
+run: build
+  deno run --watch -A main.ts
+
+# Builds everything needed by the server.
+build:
+  ./BUILD.ts
+  ninja
+
+# Watches for changes and then rebuilds. Run both this and `just run`.
+watch:
+  watchexec -i build.ninja -- just build

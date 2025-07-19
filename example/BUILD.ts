@@ -11,5 +11,3 @@ tailwind({
 });
 
 generate();
-
-//

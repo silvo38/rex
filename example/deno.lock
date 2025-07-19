@@ -3,12 +3,7 @@
   "specifiers": {
     "jsr:@silvo38/ningen@0.1": "0.1.0",
     "jsr:@silvo38/ningen@^0.0.10": "0.0.10",
-    "jsr:@silvo38/ningen@^0.0.8": "0.0.8",
-    "jsr:@silvo38/rex@*": "0.0.3",
-    "jsr:@silvo38/rex@^0.0.3": "0.0.3",
-    "jsr:@std/assert@^1.0.13": "1.0.13",
     "jsr:@std/fs@^1.0.18": "1.0.18",
-    "jsr:@std/internal@^1.0.6": "1.0.8",
     "jsr:@std/path@^1.1.0": "1.1.0",
     "npm:@tailwindcss/cli@^4.1.7": "4.1.7",
     "npm:preact-render-to-string@^6.5.13": "6.5.13_preact@10.26.7",
@@ -18,13 +13,6 @@
     "npm:tailwindcss@^4.1.11": "4.1.11"
   },
   "jsr": {
-    "@silvo38/ningen@0.0.8": {
-      "integrity": "daef85ab776bd0232d5ae3c938d0899d89e63f6176662bd9bf9e37962a7917e8",
-      "dependencies": [
-        "jsr:@std/fs",
-        "jsr:@std/path"
-      ]
-    },
     "@silvo38/ningen@0.0.10": {
       "integrity": "620bacbae8a1f0c0ac60ce50fa77ac5f499ad0c4bb42c2c435b844c3cdc3a8c2",
       "dependencies": [
@@ -39,29 +27,11 @@
         "jsr:@std/path"
       ]
     },
-    "@silvo38/rex@0.0.3": {
-      "integrity": "ee8c6b4761423ad9c353d0ad491c0e046bcc7350341ebef6c36b5320b1e6492b",
-      "dependencies": [
-        "jsr:@silvo38/ningen@^0.0.8",
-        "jsr:@std/assert",
-        "npm:preact-render-to-string",
-        "npm:preact@^10.26.4"
-      ]
-    },
-    "@std/assert@1.0.13": {
-      "integrity": "ae0d31e41919b12c656c742b22522c32fb26ed0cba32975cb0de2a273cb68b29",
-      "dependencies": [
-        "jsr:@std/internal"
-      ]
-    },
     "@std/fs@1.0.18": {
       "integrity": "24bcad99eab1af4fde75e05da6e9ed0e0dce5edb71b7e34baacf86ffe3969f3a",
       "dependencies": [
         "jsr:@std/path"
       ]
-    },
-    "@std/internal@1.0.8": {
-      "integrity": "fc66e846d8d38a47cffd274d80d2ca3f0de71040f855783724bb6b87f60891f5"
     },
     "@std/path@1.1.0": {
       "integrity": "ddc94f8e3c275627281cbc23341df6b8bcc874d70374f75fec2533521e3d6886"
@@ -465,7 +435,7 @@
   },
   "workspace": {
     "dependencies": [
-      "jsr:@silvo38/rex@^0.0.3",
+      "jsr:@silvo38/rex@^0.0.4",
       "npm:preact-render-to-string@^6.5.13",
       "npm:preact@^10.26.9",
       "npm:tailwindcss@^4.1.11"

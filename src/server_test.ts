@@ -6,9 +6,11 @@ import {
   assertEquals,
   assertInstanceOf,
   assertStrictEquals,
+  assertThrows,
 } from "@std/assert";
 import { RexRequest } from "./request.ts";
 import { ContentType } from "./content_type.ts";
+import { BoolFlag, Flag } from "./flag.ts";
 
 describe("Server", () => {
   let server: Server;
@@ -75,5 +77,15 @@ describe("Server", () => {
 
     assertOk(response);
     assertContentType(response, ContentType.Html);
+  });
+
+  it("validates flags in constructor", () => {
+    Flag.getEnvVar = () => "bar";
+    new BoolFlag("FOO");
+    assertThrows(
+      () => new Server(),
+      Error,
+      "Invalid boolean value [bar] for flag FOO",
+    );
   });
 });

@@ -135,6 +135,45 @@ class HomePage extends MyBasePage {
 }
 ```
 
+## Supplying flags / env variables
+
+The `Flag` class gives you a type-safe way of accessing flags from the env.
+There are some built-in subclasses for common primitives, or you can define your
+own.
+
+```ts
+import { BoolFlag, StringFlag, validateFlags } from "rex";
+
+// Whether to enable debugging. Defaults to true.
+export const debugFlag = new BoolFlag("DEBUG", false);
+
+// The filename of the database. Required.
+export const databaseFlag = new StringFlag("DATABASE");
+
+if (debugFlag.get()) {
+  // ...
+}
+openDatabase(databaseFlag.get());
+
+// In a unit test:
+import { debugFlag } from "...";
+debugFlag.setValueForTest(true);
+```
+
+Each flag should be defined once, at the top-level of a file. Flag values will
+be validated when the `Server` instance is constructed.
+
+You can use `.env` files, by specifiying them using the `--env-file` argument to
+`deno run`, etc.:
+
+```sh
+deno run --allow-env --env-file=dev.env src/main.ts
+```
+
+For testing, it is recommended that you specify the value of the flag in your
+test using `flag.setValueForTest(...)` rather than supplying a `.env` file
+(although the latter is possible).
+
 ## Optional/recommended dependencies
 
 ### Ningen

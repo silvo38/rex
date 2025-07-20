@@ -3,6 +3,7 @@ import { Responses } from "./response.ts";
 import { RexRequest } from "./request.ts";
 import type { Handler } from "./handler.ts";
 import { StaticFileHandler } from "./static.ts";
+import { validateFlags } from "./flag.ts";
 
 /**
  * Main server entry point. Create routes with handlers using the `setRoutes`
@@ -13,6 +14,9 @@ export class Server {
 
   constructor() {
     this.router = new Router();
+
+    // Validate flags as soon as possible.
+    validateFlags();
   }
 
   /** Defines a new route. */

@@ -1,4 +1,5 @@
 export * from "./content_type.ts";
+export * from "./flag.ts";
 export * from "./handler.ts";
 export * from "./header.ts";
 export * from "./method.ts";

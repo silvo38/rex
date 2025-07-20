@@ -4,7 +4,7 @@ list:
 # Runs the deno server. Will automatically restart whenever a file used by the
 # server changes.
 run: build
-  deno run --watch -A main.ts
+  deno run --watch -A --env-file=dev.env main.ts
 
 # Builds everything needed by the server.
 build:

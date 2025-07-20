@@ -3,7 +3,6 @@
   "specifiers": {
     "jsr:@silvo38/ningen@0.1": "0.1.0",
     "jsr:@silvo38/ningen@^0.0.10": "0.0.10",
-    "jsr:@silvo38/rex@^0.0.7": "0.0.7",
     "jsr:@std/fs@^1.0.18": "1.0.18",
     "jsr:@std/path@^1.1.0": "1.1.0",
     "npm:@tailwindcss/cli@^4.1.7": "4.1.7",
@@ -27,13 +26,6 @@
       "dependencies": [
         "jsr:@std/fs",
         "jsr:@std/path"
-      ]
-    },
-    "@silvo38/rex@0.0.7": {
-      "integrity": "9e627d67e4d90cc6afcb136912639af85e2e3793f393831f7ddd5c326fa91b96",
-      "dependencies": [
-        "npm:preact-render-to-string",
-        "npm:preact@^10.26.4"
       ]
     },
     "@std/fs@1.0.18": {
@@ -553,7 +545,7 @@
   },
   "workspace": {
     "dependencies": [
-      "jsr:@silvo38/rex@^0.0.7",
+      "jsr:@silvo38/rex@^0.0.8",
       "npm:preact-render-to-string@^6.5.13",
       "npm:preact@^10.26.9",
       "npm:tailwindcss@^4.1.11"

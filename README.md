@@ -228,7 +228,7 @@ the "entrypoint" file, and generate an output file, like so:
 import { esbuild } from "jsr:@silvo38/rex@^0.0.3/build_defs.ts";
 
 esbuild({
-  srcs: "client/app.ts",
+  srcs: "client/app.ts", // or .tsx
   out: ["dist/app.js"],
   deps: glob("client/**"),
 });
@@ -236,6 +236,26 @@ esbuild({
 
 This will generate `dist/app.js` and `dist/app.js.map`, which you can serve from
 your server.
+
+### Using client-side Preact
+
+You can using Preact to render components on the client. Simply name your file
+with a `.tsx` extension, and ensure you add this import in every `.tsx` file:
+
+```ts
+import * as _Preact from "preact";
+```
+
+esbuild will convert your JSX expressions into calls to `_Preact.createElement`
+and `_Preact.Fragment`. You can call the `render` function manually where
+needed:
+
+```ts
+_Preact.render(<MyComponent />, document.getElementById("example")!);
+```
+
+TODO: Come up with a better way of linking usages of client-side components with
+their instantiation.
 
 ### Dependency injection
 

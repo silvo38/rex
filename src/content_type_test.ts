@@ -5,6 +5,7 @@ import { assertStrictEquals } from "@std/assert/strict-equals";
 describe("inferContentType", () => {
   it("works", () => {
     assertStrictEquals(inferContentType(".html"), ContentType.Html);
+    assertStrictEquals(inferContentType(".js"), ContentType.JavaScript);
     assertStrictEquals(inferContentType(".png"), ContentType.Png);
     assertStrictEquals(inferContentType(".svg"), ContentType.Svg);
     assertStrictEquals(inferContentType(".unknown"), null);

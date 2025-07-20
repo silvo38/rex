@@ -21,6 +21,7 @@ export const tailwind: BuildFn = rule({
  */
 export const esbuild: BuildFn = rule({
   name: "esbuild",
-  cmd: "deno run -A npm:esbuild --bundle --sourcemap $in --outfile=$out",
+  cmd:
+    "deno run -A npm:esbuild --bundle --sourcemap --jsx-factory=h --jsx-fragment=Fragment --metafile=$out.meta.json $in --outfile=$out",
   desc: "Bundling JS with esbuild",
 });

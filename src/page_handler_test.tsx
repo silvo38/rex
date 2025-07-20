@@ -33,16 +33,19 @@ describe("PageHandler", () => {
 
   it("response body contains the component as HTML", async () => {
     const response = await testHandler(new TestPageHandler(), "/abc");
-    assertStrictEquals(await response.text(), "<h1>Hello</h1>");
+    assertStrictEquals(await response.text(), "<!DOCTYPE html><h1>Hello</h1>");
   });
 
-  it("response body contains the component as HTML", async () => {
+  it("response body is correct for a custom layout", async () => {
     const handler = new class extends TestPageHandler {
       override layoutPage(component: VNode) {
         return <html>{component}</html>;
       }
     }();
     const response = await testHandler(handler, "/abc");
-    assertStrictEquals(await response.text(), "<html><h1>Hello</h1></html>");
+    assertStrictEquals(
+      await response.text(),
+      "<!DOCTYPE html><html><h1>Hello</h1></html>",
+    );
   });
 });

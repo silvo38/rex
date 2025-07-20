@@ -4,6 +4,7 @@ export enum ContentType {
   Jpeg = "image/jpeg",
   Png = "image/png",
   Svg = "image/svg+xml",
+  JavaScript = "text/javascript",
 }
 
 /** Infers ContentType from the given file extension. */
@@ -17,6 +18,8 @@ export function inferContentType(extension: string): ContentType | null {
       return ContentType.Png;
     case ".svg":
       return ContentType.Svg;
+    case ".js":
+      return ContentType.JavaScript;
     default:
       return null;
   }

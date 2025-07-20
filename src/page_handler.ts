@@ -1,9 +1,8 @@
 import type { VNode } from "preact";
 import type { Handler } from "./handler.ts";
 import type { RexRequest } from "./request.ts";
-import { RexResponse } from "./response.ts";
-import { render as preactRender } from "preact-render-to-string";
-import { ContentType } from "./content_type.ts";
+import type { RexResponse } from "./response.ts";
+import { renderHtml } from "./render.ts";
 
 /**
  * Renders an HTML page using Preact.
@@ -31,7 +30,6 @@ export abstract class PageHandler implements Handler {
   async handle(request: RexRequest): Promise<RexResponse> {
     const component = await this.render(request);
     const page = this.layoutPage(component);
-    const html = preactRender(page);
-    return new RexResponse(html).setContentType(ContentType.Html);
+    return renderHtml(page);
   }
 }

@@ -6,7 +6,7 @@ import { esbuild, tailwind } from "../src/build_defs.ts";
 // import { tailwind } from "jsr:@silvo38/rex@^0.0.3/build_defs.ts";
 
 esbuild({
-  srcs: "client/app.ts",
+  srcs: "client/app.tsx",
   out: ["dist/app.js"],
   deps: glob("client/**"),
 });

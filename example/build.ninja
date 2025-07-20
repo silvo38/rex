@@ -1,9 +1,11 @@
 rule esbuild
-  command = deno run -A npm:esbuild --bundle --sourcemap $in --outfile=$out
+  command = deno run -A npm:esbuild --bundle --sourcemap --jsx-factory=$jsxFactory --jsx-fragment=$jsxFragment $in --outfile=$out
 
 rule tailwind
   command = deno run -A npm:@tailwindcss/cli@^4.1.7 --input $in --output $out
 
-build dist/app.js: esbuild client/app.ts | client client/app.ts client/library.ts
+build dist/app.js: esbuild client/app.tsx | client client/Counter.tsx client/app.tsx client/library.ts
+  jsxFactory = _Preact.createElement
+  jsxFragment = _Preact.Fragment
 
-build static/styles.gen.css: tailwind static/styles.css | pages/ExampleBasePage.tsx pages/HomePage.tsx
+build static/styles.gen.css: tailwind static/styles.css | client/Counter.tsx client/app.tsx pages/ExampleBasePage.tsx pages/HomePage.tsx

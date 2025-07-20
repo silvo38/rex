@@ -17,6 +17,9 @@ export class HomePage extends ExampleBasePage {
         <img src="/icons/dog.png" />
 
         <p>Hi, {myNameFlag.get()}</p>
+
+        {/* This is an interactive component, rendered client-side. */}
+        <div id="counter" />
       </>
     );
   }

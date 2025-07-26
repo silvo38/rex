@@ -19,7 +19,7 @@ import type { VNode } from "preact";
  */
 export function defineIsland<Props>(
   componentType: (props: Props) => VNode,
-) {
+): (props: Props) => VNode {
   const componentName = componentType.name;
   return (props: Props) => (
     <div data-component={componentName} data-props={encodeProps(props)} />

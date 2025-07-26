@@ -10,6 +10,7 @@
     "npm:@tailwindcss/cli@^4.1.7": "4.1.11",
     "npm:esbuild@*": "0.25.8",
     "npm:preact-render-to-string@^6.5.13": "6.5.13_preact@10.26.9",
+    "npm:preact@^10.26.4": "10.26.9",
     "npm:preact@^10.26.9": "10.26.9",
     "npm:tailwindcss@^4.1.11": "4.1.11"
   },

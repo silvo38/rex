@@ -1,3 +1,4 @@
+// deno-lint-ignore verbatim-module-syntax
 import * as _Preact from "preact"; // Required in all .tsx files.
 import { useSignal } from "@preact/signals";
 

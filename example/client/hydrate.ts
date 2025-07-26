@@ -17,8 +17,9 @@ export function hydrateIslands<Props>(
       // TODO: Handle null/undefined props properly.
       const encodedProps = el.getAttribute("data-props") ?? "";
       const props = decodeProps(encodedProps) as Props;
-      const component = componentType(props);
-      _Preact.render(component, el);
+      // WARNING! You can't use componentType(props) here, because that is not
+      // a real Preact element. It must be created using the h() function.
+      _Preact.render(_Preact.h(componentType, props as unknown as any), el);
     },
   );
 }

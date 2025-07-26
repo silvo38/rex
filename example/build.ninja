@@ -1,5 +1,5 @@
 rule esbuild
-  command = deno run -A npm:esbuild --bundle --sourcemap --jsx-factory=$jsxFactory --jsx-fragment=$jsxFragment $in --outfile=$out
+  command = deno run -A npm:esbuild --bundle --format=esm --sourcemap --jsx-factory=$jsxFactory --jsx-fragment=$jsxFragment $in --outfile=$out
 
 rule tailwind
   command = deno run -A npm:@tailwindcss/cli@^4.1.7 --input $in --output $out

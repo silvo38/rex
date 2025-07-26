@@ -22,7 +22,7 @@ export const tailwind: BuildFn = rule({
 export const esbuild: BuildFn = rule({
   name: "esbuild",
   cmd:
-    "deno run -A npm:esbuild --bundle --sourcemap --jsx-factory=$jsxFactory --jsx-fragment=$jsxFragment $in --outfile=$out",
+    "deno run -A npm:esbuild --bundle --format=esm --sourcemap --jsx-factory=$jsxFactory --jsx-fragment=$jsxFragment $in --outfile=$out",
   desc: "Bundling JS with esbuild",
   vars: {
     // JSX factory functions. Ensure you include this in all of your .jsx files:

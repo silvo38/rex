@@ -23,7 +23,7 @@ export class HomePage extends ExampleBasePage {
         <p>Hi, {myNameFlag.get()}</p>
 
         {/* This is an interactive component, rendered client-side. */}
-        <CounterIsland startingValue={0} />
+        <CounterIsland startingValue={100} />
       </>
     );
   }

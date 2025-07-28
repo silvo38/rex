@@ -1,7 +1,7 @@
 import * as _Preact from "preact";
 import { thisIsADependency } from "./library.ts";
 import { Counter } from "./Counter.tsx";
-import { hydrateIslands } from "./hydrate.ts";
+import { hydrateIslands } from "rex/islands";
 
 export function hello(): number {
   return thisIsADependency() * 10;

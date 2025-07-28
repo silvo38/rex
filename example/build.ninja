@@ -4,7 +4,7 @@ rule esbuild
 rule tailwind
   command = deno run -A npm:@tailwindcss/cli@^4.1.7 --input $in --output $out
 
-build dist/app.js: esbuild client/app.tsx | client client/Counter.tsx client/app.tsx client/hydrate.ts client/library.ts
+build dist/app.js: esbuild client/app.tsx | client client/Counter.tsx client/app.tsx client/library.ts
   jsxFactory = _Preact.createElement
   jsxFragment = _Preact.Fragment
 

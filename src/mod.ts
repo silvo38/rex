@@ -2,7 +2,7 @@ export * from "./content_type.ts";
 export * from "./flag.ts";
 export * from "./handler.ts";
 export * from "./header.ts";
-export * from "./island.tsx";
+export * from "./islands/mod.ts";
 export * from "./method.ts";
 export * from "./page_handler.ts";
 export * from "./render.ts";

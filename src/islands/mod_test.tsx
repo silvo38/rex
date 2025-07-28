@@ -1,13 +1,14 @@
 import { describe, it } from "@std/testing/bdd";
 import { assertEquals, assertStrictEquals } from "@std/assert";
-import { decodeProps, defineIsland, encodeProps } from "./island.tsx";
+import { decodeProps, defineIsland, encodeProps } from "./mod.ts";
 import { render } from "preact-render-to-string";
+import { createElement } from "preact";
 
 function TestComponent({ foo, bar }: { foo: string; bar: number }) {
   return <span>Hello {foo} {bar}</span>;
 }
 
-const TestIsland = defineIsland(TestComponent);
+const TestIsland = defineIsland(TestComponent, createElement);
 
 describe("Island", () => {
   it("encodeProps and decodeProps can round-trip", () => {
@@ -25,4 +26,6 @@ describe("Island", () => {
       render(<div data-component="TestComponent" data-props={expectedProps} />),
     );
   });
+
+  // TODO: Figure out a simple way to test the hydrate functions.
 });

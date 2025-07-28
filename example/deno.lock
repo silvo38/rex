@@ -2,7 +2,6 @@
   "version": "4",
   "specifiers": {
     "jsr:@silvo38/ningen@0.1": "0.1.0",
-    "jsr:@silvo38/rex@^0.0.10": "0.0.10",
     "jsr:@std/fs@^1.0.18": "1.0.19",
     "jsr:@std/internal@^1.0.9": "1.0.9",
     "jsr:@std/path@^1.1.0": "1.1.1",
@@ -21,13 +20,6 @@
       "dependencies": [
         "jsr:@std/fs",
         "jsr:@std/path@^1.1.0"
-      ]
-    },
-    "@silvo38/rex@0.0.10": {
-      "integrity": "68e1e44f9fa630fb99c5f2296e57b256f7557d796427815d8ec6162fd2da3f5b",
-      "dependencies": [
-        "npm:preact-render-to-string",
-        "npm:preact@^10.26.4"
       ]
     },
     "@std/fs@1.0.19": {
@@ -560,7 +552,7 @@
   },
   "workspace": {
     "dependencies": [
-      "jsr:@silvo38/rex@^0.0.10",
+      "jsr:@silvo38/rex@^0.0.11",
       "npm:@preact/signals@^2.2.1",
       "npm:preact-render-to-string@^6.5.13",
       "npm:preact@^10.26.9",

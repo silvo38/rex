@@ -1,4 +1,3 @@
-import * as _Preact from "preact";
 import { thisIsADependency } from "./library.ts";
 import { Counter } from "./Counter.tsx";
 import { hydrateIslands } from "rex/islands";

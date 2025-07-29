@@ -1,14 +1,13 @@
 import { describe, it } from "@std/testing/bdd";
 import { assertEquals, assertStrictEquals } from "@std/assert";
-import { decodeProps, defineIsland, encodeProps } from "./mod.ts";
+import { decodeProps, defineIsland, encodeProps } from "./mod.tsx";
 import { render } from "preact-render-to-string";
-import { createElement } from "preact";
 
 function TestComponent({ foo, bar }: { foo: string; bar: number }) {
   return <span>Hello {foo} {bar}</span>;
 }
 
-const TestIsland = defineIsland(TestComponent, createElement);
+const TestIsland = defineIsland(TestComponent);
 
 describe("Island", () => {
   it("encodeProps and decodeProps can round-trip", () => {

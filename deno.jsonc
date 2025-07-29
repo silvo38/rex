@@ -1,11 +1,11 @@
 {
   "name": "@silvo38/rex",
-  "version": "0.0.10",
+  "version": "0.0.12",
   "license": "MIT",
   "exports": {
     ".": "./src/mod.ts",
     "./build_defs.ts": "./src/build_defs.ts",
-    "./islands": "./src/islands/mod.ts",
+    "./islands": "./src/islands/mod.tsx",
     "./testing": "./src/testing/mod.ts"
   },
   "imports": {

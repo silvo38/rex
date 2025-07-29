@@ -180,12 +180,12 @@ test using `flag.setValueForTest(...)` rather than supplying a `.env` file
 
 The [Ningen](http://github.com/silvo38/ningen) build system is a convenient way
 to compile JS/CSS files for your server. There are helper functions defined in
-`src/build_defs.ts` to make it easy to run Tailwind and esbuild.
+`src/build_defs.ts` to make it easy to run Tailwind and the Deno JS bundler.
 
 Import them from your `BUILD.ts` file:
 
 ```ts
-import { esbuild, tailwind } from "jsr:@silvo38/rex@^0.0.3/build_defs.ts";
+import { bundle, tailwind } from "jsr:@silvo38/rex@^0.0.3/build_defs.ts";
 ```
 
 ### Tailwind
@@ -221,13 +221,13 @@ forget to serve the CSS file using a `StaticFileHandler` or `serveFile`.
 
 ### Bundling and serving client-side JavaScript
 
-Use [esbuild](https://esbuild.github.io) to bundle your client JS. Point it at
+Use the `bundle` rule to bundle your client JS using `deno bundle`. Point it at
 the "entrypoint" file, and generate an output file, like so:
 
 ```ts
-import { esbuild } from "jsr:@silvo38/rex@^0.0.3/build_defs.ts";
+import { bundle } from "jsr:@silvo38/rex@^0.0.3/build_defs.ts";
 
-esbuild({
+bundle({
   srcs: "client/app.ts", // or .tsx
   out: ["dist/app.js"],
   deps: glob("client/**"),
@@ -240,22 +240,23 @@ your server.
 ### Using client-side Preact
 
 You can using Preact to render components on the client. Simply name your file
-with a `.tsx` extension, and ensure you add this import in every `.tsx` file:
+with a `.tsx` extension, and ensure you include this snippet in your `deno.json`
+file:
 
-```ts
-import * as _Preact from "preact";
+```json
+"compilerOptions": {
+  "jsx": "react-jsx",
+  "jsxImportSource": "preact"
+}
 ```
 
-esbuild will convert your JSX expressions into calls to `_Preact.createElement`
-and `_Preact.Fragment`. You can call the `render` function manually where
-needed:
+You can call the `render` function manually where needed:
 
 ```ts
-_Preact.render(<MyComponent />, document.getElementById("example")!);
-```
+import { render } from "preact";
 
-TODO: Come up with a better way of linking usages of client-side components with
-their instantiation.
+render(<MyComponent />, document.getElementById("example")!);
+```
 
 ### Dependency injection
 

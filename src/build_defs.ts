@@ -9,25 +9,18 @@ export const tailwind: BuildFn = rule({
   name: "tailwind",
   cmd: "deno run -A npm:@tailwindcss/cli@^4.1.7 --input $in --output $out",
   desc: "Generating Tailwind CSS",
+  pool: "console",
   // Any .tsx file could pull in a new class from Tailwind, which would require
   // CSS to be regenerated.
   deps: glob("**/*.tsx"),
 });
 
-/**
- * Ningen build rule for invoking the esbuild bundler. Use `srcs` for your
- * entrypoint script, and `out` for your output JS file. A `.map` sourcemap file
- * will also be generated.
- */
-export const esbuild: BuildFn = rule({
-  name: "esbuild",
-  cmd:
-    "deno run -A npm:esbuild --bundle --format=esm --sourcemap --jsx-factory=$jsxFactory --jsx-fragment=$jsxFragment $in --outfile=$out",
-  desc: "Bundling JS with esbuild",
-  vars: {
-    // JSX factory functions. Ensure you include this in all of your .jsx files:
-    // import * as _Preact from 'preact';
-    jsxFactory: "_Preact.createElement",
-    jsxFragment: "_Preact.Fragment",
-  },
+/** Ningen build rule for bundling client JS using Deno. */
+export const bundle: BuildFn = rule({
+  name: "bundle",
+  cmd: "deno bundle --platform=browser --sourcemap=external --output=$out $in",
+  desc: "Deno bundle",
+  pool: "console",
 });
+
+// TODO: Add rule for calling `deno check`.

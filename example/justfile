@@ -8,9 +8,9 @@ run: build
 
 # Builds everything needed by the server.
 build:
-  deno check client/app.ts main.ts
   ./BUILD.ts
   ninja
+  deno check client/app.ts main.ts
 
 # Watches for changes and then rebuilds. Run both this and `just run`.
 watch:

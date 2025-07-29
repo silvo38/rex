@@ -278,6 +278,23 @@ class MyHandler implements Handler {
 }
 ```
 
+### Protobuf
+
+There is very rudimentary support for protobuf using `ts-proto`. Install the
+`protoc` compiler yourself, then use the `protobuf` Ningen function:
+
+```ts
+protobuf({
+  srcs: "protos/simple.proto",
+  out: "protos/simple.ts",
+});
+```
+
+Don't forget to disable automatic formatting and linting for the generated files
+in your `deno.json` file.
+
+TODO: Design a very simple RPC system, using JSON as the wire format.
+
 ## Testing
 
 The `rex/testing` package contains lots of helpers for unit testing your

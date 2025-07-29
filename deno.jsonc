@@ -18,6 +18,16 @@
     "jsx": "react-jsx",
     "jsxImportSource": "preact"
   },
+  "fmt": {
+    "exclude": [
+      "example/protos/"
+    ]
+  },
+  "lint": {
+    "exclude": [
+      "example/protos/"
+    ]
+  },
   "publish": {
     "include": [
       "LICENSE",

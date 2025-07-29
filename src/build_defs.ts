@@ -23,4 +23,11 @@ export const bundle: BuildFn = rule({
   pool: "console",
 });
 
+export const protobuf: BuildFn = rule({
+  name: "protobuf",
+  cmd:
+    "protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=. $in",
+  desc: "Generating protobuf",
+});
+
 // TODO: Add rule for calling `deno check`.

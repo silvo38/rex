@@ -3,3 +3,5 @@ node_modules
 .ninja_lock
 .ninja_log
 *.gen.*
+protos/*.ts
+

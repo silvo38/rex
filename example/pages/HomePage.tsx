@@ -1,13 +1,9 @@
-import { defineIsland, type RexRequest, StringFlag } from "rex";
+import { type RexRequest, StringFlag } from "rex";
 import { ExampleBasePage } from "./ExampleBasePage.tsx";
-import { Counter } from "../client/Counter.tsx";
-import { createElement } from "preact";
+import { CounterIsland } from "../client/Counter.tsx";
 
 // Define a flag, whose value is specified in the .env file.
 const myNameFlag = new StringFlag("MY_NAME", "Default Name");
-
-// TODO: Put this somewhere else?
-export const CounterIsland = defineIsland(Counter, createElement);
 
 /** Handler for the home page, served at `/`. */
 export class HomePage extends ExampleBasePage {

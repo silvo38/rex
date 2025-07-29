@@ -1,4 +1,6 @@
 import { useSignal } from "@preact/signals";
+import { defineIsland } from "rex/islands";
+import { createElement } from "preact";
 
 export interface CounterProps {
   startingValue: number;
@@ -31,3 +33,5 @@ export function Counter(props: CounterProps) {
     </>
   );
 }
+
+export const CounterIsland = defineIsland(Counter, createElement);

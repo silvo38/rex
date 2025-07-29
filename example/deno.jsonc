@@ -12,7 +12,7 @@
     "jsxImportSource": "preact"
   },
   // Required in order to invoke Tailwind.
-  "nodeModulesDir": "auto",
+  "nodeModulesDir": "auto"
   // Override the rex jsr import from above to use the code from this repo.
-  "links": ["../"]
+  // "links": ["../"]
 }

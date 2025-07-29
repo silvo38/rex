@@ -8,7 +8,7 @@ run: build
 
 # Builds everything needed by the server.
 build:
-  deno check app.tsx
+  deno check client/app.ts main.ts
   ./BUILD.ts
   ninja
 

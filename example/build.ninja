@@ -4,8 +4,8 @@ rule esbuild
 rule tailwind
   command = deno run -A npm:@tailwindcss/cli@^4.1.7 --input $in --output $out
 
-build dist/app.js: esbuild client/app.tsx | client client/Counter.tsx client/app.tsx client/library.ts
+build dist/app.js: esbuild client/app.ts | client client/Counter.tsx client/app.ts client/library.ts
   jsxFactory = _Preact.createElement
   jsxFragment = _Preact.Fragment
 
-build static/styles.gen.css: tailwind static/styles.css | client/Counter.tsx client/app.tsx pages/ExampleBasePage.tsx pages/HomePage.tsx
+build static/styles.gen.css: tailwind static/styles.css | client/Counter.tsx pages/ExampleBasePage.tsx pages/HomePage.tsx

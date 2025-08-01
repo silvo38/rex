@@ -79,6 +79,17 @@ describe("Server", () => {
     assertContentType(response, ContentType.Html);
   });
 
+  it("serveDirectory works", async () => {
+    server.serveDirectory("/abc/*", "./src/testdata");
+
+    const response = await server.handle(
+      new Request("http://example.com/abc/hello.html"),
+    );
+
+    assertOk(response);
+    assertContentType(response, ContentType.Html);
+  });
+
   it("validates flags in constructor", () => {
     Flag.getEnvVar = () => "bar";
     new BoolFlag("FOO");

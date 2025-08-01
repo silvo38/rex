@@ -4,6 +4,7 @@ import { RexRequest } from "./request.ts";
 import type { Handler } from "./handler.ts";
 import { StaticFileHandler } from "./static.ts";
 import { validateFlags } from "./flag.ts";
+import { StaticDirectoryHandler } from "@silvo38/rex";
 
 /**
  * Main server entry point. Create routes with handlers using the `setRoutes`
@@ -36,6 +37,15 @@ export class Server {
   /** Serves the file with the given path on disk at the specified route. */
   serveFile(route: string, path: string): Server {
     this.addHandler(new StaticFileHandler({ route, path }));
+    return this;
+  }
+
+  /**
+   * Serves the folder with the given path on disk at the specified route.
+   * Supply a route like `/foo/bar/*` and a directory like `foo/bar`.
+   */
+  serveDirectory(route: string, directory: string): Server {
+    this.addHandler(new StaticDirectoryHandler({ route, directory }));
     return this;
   }
 

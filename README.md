@@ -80,10 +80,12 @@ serve a different file at `/fonts/Roboto.ttf`, make sure you add a
 `StaticFileHandler` for that route first, before adding a handler for
 `/fonts/*`).
 
-For convenience, you can use the helper method instead:
+For convenience, you can use the helper methods instead:
 
 ```ts
-server.serveFile("/logo.svg", "static/logo.svg");
+server
+  .serveFile("/logo.svg", "static/logo.svg")
+  .serveDirectory("/fonts", "static/fonts");
 ```
 
 ## Rendering HTML

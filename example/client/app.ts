@@ -1,6 +1,6 @@
 import { thisIsADependency } from "./library.ts";
 import { Counter } from "./Counter.tsx";
-import { hydrateIslands } from "rex/islands";
+import { hydrateIslands } from "rex/client";
 
 export function hello(): number {
   return thisIsADependency() * 10;

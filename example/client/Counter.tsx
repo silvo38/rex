@@ -1,5 +1,5 @@
 import { useSignal } from "@preact/signals";
-import { defineIsland } from "rex/islands";
+import { defineIsland } from "rex/client";
 
 export interface CounterProps {
   startingValue: number;

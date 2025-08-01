@@ -5,7 +5,7 @@
   "exports": {
     ".": "./src/mod.ts",
     "./build_defs.ts": "./src/build_defs.ts",
-    "./islands": "./src/islands/mod.tsx",
+    "./client": "./src/client/mod.ts",
     "./testing": "./src/testing/mod.ts"
   },
   "imports": {

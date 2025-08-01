@@ -160,14 +160,8 @@
   }
 }
 @layer utilities {
-  .relative {
-    position: relative;
-  }
   .flex {
     display: flex;
-  }
-  .table {
-    display: table;
   }
   .flex-row {
     flex-direction: row;

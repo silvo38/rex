@@ -1,6 +1,6 @@
 import { describe, it } from "@std/testing/bdd";
 import { assertEquals, assertStrictEquals } from "@std/assert";
-import { decodeProps, defineIsland, encodeProps } from "./mod.tsx";
+import { decodeProps, defineIsland, encodeProps } from "./island.tsx";
 import { render } from "preact-render-to-string";
 
 function TestComponent({ foo, bar }: { foo: string; bar: number }) {

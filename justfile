@@ -8,6 +8,7 @@ fix:
 presubmit: test
   deno fmt --check
   deno lint
+  cd example && just build
 
 # Updates the version number.
 bump version:

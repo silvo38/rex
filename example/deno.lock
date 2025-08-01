@@ -2,17 +2,10 @@
   "version": "5",
   "specifiers": {
     "jsr:@silvo38/ningen@0.1": "0.1.0",
-    "jsr:@silvo38/rex@^0.0.13": "0.0.13",
-    "jsr:@std/assert@^1.0.13": "1.0.13",
-    "jsr:@std/data-structures@^1.0.9": "1.0.9",
     "jsr:@std/fs@^1.0.18": "1.0.19",
-    "jsr:@std/fs@^1.0.19": "1.0.19",
-    "jsr:@std/internal@^1.0.10": "1.0.10",
-    "jsr:@std/internal@^1.0.6": "1.0.10",
     "jsr:@std/internal@^1.0.9": "1.0.10",
     "jsr:@std/path@^1.1.0": "1.1.1",
     "jsr:@std/path@^1.1.1": "1.1.1",
-    "jsr:@std/testing@^1.0.11": "1.0.15",
     "npm:@preact/signals@^2.2.1": "2.2.1_preact@10.26.9",
     "npm:@tailwindcss/cli@^4.1.7": "4.1.11",
     "npm:preact-render-to-string@^6.5.13": "6.5.13_preact@10.26.9",
@@ -25,32 +18,14 @@
     "@silvo38/ningen@0.1.0": {
       "integrity": "684076399de5edec5fd594006345f523e887cd0d93607eaca282774fe19fad4e",
       "dependencies": [
-        "jsr:@std/fs@^1.0.18",
+        "jsr:@std/fs",
         "jsr:@std/path@^1.1.0"
       ]
-    },
-    "@silvo38/rex@0.0.13": {
-      "integrity": "9ea9de0f8cf48c1d0dd9674db9656c4c89fa3e9e4b16f509dc2bc9781dd1e604",
-      "dependencies": [
-        "jsr:@silvo38/ningen",
-        "jsr:@std/assert",
-        "npm:preact-render-to-string",
-        "npm:preact@^10.26.4"
-      ]
-    },
-    "@std/assert@1.0.13": {
-      "integrity": "ae0d31e41919b12c656c742b22522c32fb26ed0cba32975cb0de2a273cb68b29",
-      "dependencies": [
-        "jsr:@std/internal@^1.0.6"
-      ]
-    },
-    "@std/data-structures@1.0.9": {
-      "integrity": "033d6e17e64bf1f84a614e647c1b015fa2576ae3312305821e1a4cb20674bb4d"
     },
     "@std/fs@1.0.19": {
       "integrity": "051968c2b1eae4d2ea9f79a08a3845740ef6af10356aff43d3e2ef11ed09fb06",
       "dependencies": [
-        "jsr:@std/internal@^1.0.9",
+        "jsr:@std/internal",
         "jsr:@std/path@^1.1.1"
       ]
     },
@@ -63,17 +38,7 @@
     "@std/path@1.1.1": {
       "integrity": "fe00026bd3a7e6a27f73709b83c607798be40e20c81dde655ce34052fd82ec76",
       "dependencies": [
-        "jsr:@std/internal@^1.0.9"
-      ]
-    },
-    "@std/testing@1.0.15": {
-      "integrity": "a490169f5ccb0f3ae9c94fbc69d2cd43603f2cffb41713a85f99bbb0e3087cbc",
-      "dependencies": [
-        "jsr:@std/assert",
-        "jsr:@std/data-structures",
-        "jsr:@std/fs@^1.0.19",
-        "jsr:@std/internal@^1.0.10",
-        "jsr:@std/path@^1.1.1"
+        "jsr:@std/internal"
       ]
     }
   },
@@ -596,7 +561,7 @@
   },
   "workspace": {
     "dependencies": [
-      "jsr:@silvo38/rex@^0.0.13",
+      "jsr:@silvo38/rex@^0.0.14",
       "npm:@preact/signals@^2.2.1",
       "npm:preact-render-to-string@^6.5.13",
       "npm:preact@^10.26.9",

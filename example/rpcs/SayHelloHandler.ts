@@ -1,5 +1,5 @@
 import { SayHelloBase } from "../gen/greeting_service.ts";
-import { HelloRequest, HelloResponse } from "../schema.ts";
+import type { HelloRequest, HelloResponse } from "../schema.ts";
 
 // Example of how to implement an RPC.
 // RPC was defined in `greeting_service.json`.

@@ -203,7 +203,7 @@ For instance, using the Just command runner, you could add the following to your
 tailwind:
   deno run -A npm:@tailwindcss/cli@^4.1.7 \
     --input static/styles.css \
-    --output static/styles.gen.css
+    --output dist/styles.css
 ```
 
 If you are using the build system, there is a `tailwind` build rule provided in
@@ -214,11 +214,11 @@ import { tailwind } from "jsr:@silvo38/rex@^0.0.3/build_defs.ts";
 
 tailwind({
   srcs: "static/styles.css",
-  out: "static/styles.gen.css",
+  out: "dist/styles.css",
 });
 ```
 
-This would generate `styles.gen.css`, which you would load in your page. Don't
+This would generate `dist/styles.css`, which you would load in your page. Don't
 forget to serve the CSS file using a `StaticFileHandler` or `serveFile`.
 
 ### Bundling and serving client-side JavaScript

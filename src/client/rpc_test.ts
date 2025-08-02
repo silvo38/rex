@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, it } from "@std/testing/bdd";
 import { assertSpyCalls, type Stub, stub } from "@std/testing/mock";
-import { sendRpc } from "./rpc.ts";
+import { getRpcRoute, sendRpc } from "./rpc.ts";
 import { assertEquals, assertRejects, assertStrictEquals } from "@std/assert";
 
 describe("sendRpc", () => {
@@ -23,7 +23,7 @@ describe("sendRpc", () => {
 
     assertSpyCalls(fetchStub, 1);
     const args = fetchStub.calls[0].args;
-    assertStrictEquals(args[0], "/api/MyService/myRpc");
+    assertStrictEquals(args[0], "/api/MyService.myRpc");
     assertEquals(args[1], {
       body: '{"foo":123}',
       method: "POST",
@@ -63,4 +63,8 @@ describe("sendRpc", () => {
       "RPC error: statusText body",
     );
   });
+});
+
+Deno.test("getRpcRoute works", () => {
+  assertStrictEquals(getRpcRoute("Foo", "bar"), "/api/Foo.bar");
 });

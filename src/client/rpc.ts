@@ -7,7 +7,7 @@ export async function sendRpc<Req, Res>(
   method: "GET" | "POST",
   request: Req,
 ): Promise<Res> {
-  const response = await fetch(`/api/${service}/${rpc}`, {
+  const response = await fetch(getRpcRoute(service, rpc), {
     method,
     body: JSON.stringify(request),
     headers: {
@@ -21,4 +21,9 @@ export async function sendRpc<Req, Res>(
     );
   }
   return JSON.parse(await response.text());
+}
+
+/** Returns the canonical route for an RPC. */
+export function getRpcRoute(service: string, rpc: string): string {
+  return `/api/${service}.${rpc}`;
 }

@@ -30,4 +30,32 @@ export const protobuf: BuildFn = rule({
   desc: "Generating protobuf",
 });
 
+const rpcGeneratorRule = rule({
+  name: "rpcgen",
+  cmd: "deno run --allow-read --allow-write rex/tools/rpc_generator.ts " +
+    "--config=$in --client-out=$client --service-out=$service",
+  desc: "Generating RPC service",
+});
+
+/**
+ * Ningen build rule for generating an RPC service.
+ *
+ * `src` is the `.json` config file containing the service specification.
+ * `client` is the path to the generated `.ts` client, and `service` to the
+ * generated service (used in the server).
+ */
+export function rpcService(
+  { src, client, service }: {
+    src: string;
+    client: string;
+    service: string;
+  },
+) {
+  rpcGeneratorRule({
+    srcs: src,
+    out: [client, service],
+    vars: { client, service },
+  });
+}
+
 // TODO: Add rule for calling `deno check`.

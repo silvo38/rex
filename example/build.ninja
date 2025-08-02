@@ -5,12 +5,19 @@ rule bundle
 rule protobuf
   command = protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=. $in
 
+rule rpcgen
+  command = deno run --allow-read --allow-write rex/tools/rpc_generator.ts --config=$in --client-out=$client --service-out=$service
+
 rule tailwind
   command = deno run -A npm:@tailwindcss/cli@^4.1.7 --input $in --output $out
   pool = console
 
 build dist/app.js: bundle client/app.ts | client client/Counter.tsx client/app.ts client/library.ts
 
-build static/styles.gen.css: tailwind static/styles.css | client/Counter.tsx pages/ExampleBasePage.tsx pages/HomePage.tsx
+build dist/styles.css: tailwind static/styles.css | client/Counter.tsx pages/ExampleBasePage.tsx pages/HomePage.tsx
 
 build protos/simple.ts: protobuf protos/simple.proto
+
+build gen/greeting_service_client.ts gen/greeting_service.ts: rpcgen greeting_service.json
+  client = gen/greeting_service_client.ts
+  service = gen/greeting_service.ts

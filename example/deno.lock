@@ -2,6 +2,7 @@
   "version": "5",
   "specifiers": {
     "jsr:@silvo38/ningen@0.1": "0.1.0",
+    "jsr:@std/cli@^1.0.21": "1.0.21",
     "jsr:@std/fs@^1.0.18": "1.0.19",
     "jsr:@std/internal@^1.0.9": "1.0.10",
     "jsr:@std/path@^1.1.0": "1.1.1",
@@ -21,6 +22,9 @@
         "jsr:@std/fs",
         "jsr:@std/path@^1.1.0"
       ]
+    },
+    "@std/cli@1.0.21": {
+      "integrity": "cd25b050bdf6282e321854e3822bee624f07aca7636a3a76d95f77a3a919ca2a"
     },
     "@std/fs@1.0.19": {
       "integrity": "051968c2b1eae4d2ea9f79a08a3845740ef6af10356aff43d3e2ef11ed09fb06",

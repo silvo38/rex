@@ -1,0 +1,14 @@
+{
+  "service": "GreetingService",
+  "importMap": {
+    "../schema.ts": ["HelloRequest", "HelloResponse"]
+  },
+  "rpcs": [
+    {
+      "name": "sayHello",
+      "method": "GET",
+      "request": "HelloRequest",
+      "response": "HelloResponse"
+    }
+  ]
+}

@@ -14,11 +14,15 @@
   },
   "fmt": {
     "exclude": [
+      "dist/",
+      "gen/",
       "protos/"
     ]
   },
   "lint": {
     "exclude": [
+      "dist/",
+      "gen/",
       "protos/"
     ]
   },

@@ -1,12 +1,7 @@
 import { afterEach, beforeEach, describe, it } from "@std/testing/bdd";
 import { assertSpyCalls, type Stub, stub } from "@std/testing/mock";
 import { sendRpc } from "./rpc.ts";
-import {
-  assertEquals,
-  assertRejects,
-  assertStrictEquals,
-  assertThrows,
-} from "@std/assert";
+import { assertEquals, assertRejects, assertStrictEquals } from "@std/assert";
 
 describe("sendRpc", () => {
   let fetchStub: Stub;

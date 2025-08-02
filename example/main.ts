@@ -6,7 +6,7 @@ const server = new Server()
   // Serve the icons directory under /icons.
   .serveDirectory("/icons/*", "static/icons")
   // Serve the generated CSS file as /styles.css.
-  .serveFile("/styles.css", "static/styles.gen.css")
+  .serveFile("/styles.css", "dist/styles.css")
   // Serve the bundled JS file (and sourcemap).
   .serveFile("/app.js", "dist/app.js")
   .serveFile("/app.js.map", "dist/app.js.map");

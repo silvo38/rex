@@ -1,8 +1,10 @@
 import { Server } from "rex";
 import { HomePage } from "./pages/HomePage.tsx";
+import { SayHelloHandler } from "./rpcs/SayHelloHandler.ts";
 
 const server = new Server()
   .addHandler(new HomePage())
+  .addHandler(new SayHelloHandler())
   // Serve the icons directory under /icons.
   .serveDirectory("/icons/*", "static/icons")
   // Serve the generated CSS file as /styles.css.

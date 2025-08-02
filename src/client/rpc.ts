@@ -1,4 +1,5 @@
-import { ContentType, Header } from "@silvo38/rex";
+import { ContentType } from "../content_type.ts";
+import { Header } from "../header.ts";
 
 /** Sends an RPC, serialised as JSON. */
 export async function sendRpc<Req, Res>(

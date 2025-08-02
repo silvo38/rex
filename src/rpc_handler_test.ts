@@ -1,12 +1,11 @@
 import { describe, it } from "@std/testing/bdd";
 import { assertEquals, assertStrictEquals } from "@std/assert";
-import { assertOk, assertStatus } from "./testing/assert.ts";
+import { assertContentType, assertOk, assertStatus } from "./testing/assert.ts";
 import { testHandler } from "./testing/test_server.ts";
 import { RpcHandler } from "./rpc_handler.ts";
 import { Method } from "./method.ts";
 import { Status } from "./status.ts";
 import { assertSpyCalls, spy } from "@std/testing/mock";
-import { assertContentType } from "@silvo38/rex/testing";
 import { ContentType } from "./content_type.ts";
 
 interface TestRequest {

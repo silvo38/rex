@@ -1,10 +1,8 @@
-import { thisIsADependency } from "./library.ts";
+import { callGreetingRpc } from "./library.ts";
 import { Counter } from "./Counter.tsx";
 import { hydrateIslands } from "rex/client";
 
-export function hello(): number {
-  return thisIsADependency() * 10;
-}
+callGreetingRpc();
 
 // Render all Counter components on the page.
 hydrateIslands(Counter);

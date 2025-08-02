@@ -12,7 +12,7 @@ rule tailwind
   command = deno run -A npm:@tailwindcss/cli@^4.1.7 --input $in --output $out
   pool = console
 
-build dist/app.js: bundle client/app.ts | client client/Counter.tsx client/app.ts client/library.ts
+build dist/app.js: bundle client/app.ts | client client/Counter.tsx client/app.ts client/library.ts gen gen/greeting_service.ts gen/greeting_service_client.ts
 
 build dist/styles.css: tailwind static/styles.css | client/Counter.tsx pages/ExampleBasePage.tsx pages/HomePage.tsx
 

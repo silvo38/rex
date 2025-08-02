@@ -4,7 +4,7 @@ import { RexRequest } from "./request.ts";
 import type { Handler } from "./handler.ts";
 import { StaticFileHandler } from "./static.ts";
 import { validateFlags } from "./flag.ts";
-import { StaticDirectoryHandler } from "@silvo38/rex";
+import { StaticDirectoryHandler } from "./static.ts";
 
 /**
  * Main server entry point. Create routes with handlers using the `setRoutes`

@@ -6,7 +6,7 @@ import { bundle, protobuf, rpcService, tailwind } from "rex/build_defs.ts";
 bundle({
   srcs: "client/app.ts",
   out: ["dist/app.js"],
-  deps: glob("client/**"),
+  deps: glob(["client/**", "gen/**"]),
 });
 
 tailwind({

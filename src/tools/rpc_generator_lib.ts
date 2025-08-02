@@ -1,4 +1,4 @@
-import { getRpcRoute } from "@silvo38/rex";
+import { getRpcRoute } from "../client/rpc.ts";
 
 export interface ServiceConfig {
   /** The name of the service. */

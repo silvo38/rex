@@ -6,7 +6,7 @@
   "rpcs": [
     {
       "name": "sayHello",
-      "method": "GET",
+      "method": "POST",
       "request": "HelloRequest",
       "response": "HelloResponse"
     }

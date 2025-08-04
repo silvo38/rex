@@ -7,14 +7,21 @@ import { ContentType } from "./content_type.ts";
 import { assertStrictEquals } from "@std/assert/strict-equals";
 import type { VNode } from "preact";
 
-class TestPageHandler extends PageHandler {
+class TestPageHandler extends PageHandler<string> {
   override route = "/abc";
 
+  dataReceived?: string;
   requestReceived?: RexRequest;
 
-  override render(request: RexRequest) {
+  override load(request: RexRequest): string | Promise<string> {
     this.requestReceived = request;
-    return <h1>Hello</h1>;
+    return "Hello";
+  }
+
+  override render(data: string, request: RexRequest) {
+    this.dataReceived = data;
+    this.requestReceived = request;
+    return <h1>{data}</h1>;
   }
 }
 
@@ -23,6 +30,12 @@ describe("PageHandler", () => {
     const response = await testHandler(new TestPageHandler(), "/abc");
     assertOk(response);
     assertContentType(response, ContentType.Html);
+  });
+
+  it("render method receives the request object", async () => {
+    const handler = new TestPageHandler();
+    await testHandler(handler, "/abc");
+    assertStrictEquals(handler.requestReceived?.path, "/abc");
   });
 
   it("render method receives the request object", async () => {

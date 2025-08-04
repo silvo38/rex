@@ -2,7 +2,7 @@ import { PageHandler } from "rex";
 import type { VNode } from "preact";
 
 /** Base page template applied to all HTML pages in this server. */
-export abstract class ExampleBasePage extends PageHandler {
+export abstract class ExampleBasePage<Data> extends PageHandler<Data> {
   override layoutPage(component: VNode): VNode {
     return (
       <html>

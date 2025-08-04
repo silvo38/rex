@@ -49,15 +49,30 @@ export class Server {
     return this;
   }
 
+  /**
+   * Returns the handler which should handle the given request, or null if there
+   * is no matching handler. Also returns the RexRequest (which embeds any
+   * matched params).
+   */
+  matchHandler(
+    request: Request,
+  ): { handler: Handler; request: RexRequest } | null {
+    const match = this.router.getHandler(request.url);
+    if (!match) {
+      return null;
+    }
+    const { handler, route } = match;
+    return { handler, request: RexRequest.create(request, route) };
+  }
+
   handle(request: Request): Response | Promise<Response> {
-    const route = this.router.getHandler(request.url);
-    if (!route) {
+    const match = this.matchHandler(request);
+    if (!match) {
       // TODO: Allow customising 404 response.
       return Responses.notFound();
     }
 
-    const requestWrapper = RexRequest.create(request, route.route);
     // TODO: Catch errors?
-    return route.handler.handle(requestWrapper);
+    return match.handler.handle(match.request);
   }
 }

@@ -1,5 +1,6 @@
 /** Common content types. */
 export enum ContentType {
+  Css = "text/css",
   Html = "text/html; charset=utf-8",
   JavaScript = "text/javascript",
   Jpeg = "image/jpeg",
@@ -11,6 +12,8 @@ export enum ContentType {
 /** Infers ContentType from the given file extension. */
 export function inferContentType(extension: string): ContentType | null {
   switch (extension) {
+    case ".css":
+      return ContentType.Css;
     case ".html":
       return ContentType.Html;
     case ".jpg":

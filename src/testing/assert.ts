@@ -21,3 +21,15 @@ export function assertContentType(
     `Content-Type header did not match`,
   );
 }
+
+export function assertHeader(
+  response: Response,
+  header: Header | string,
+  expected: string,
+) {
+  assertStrictEquals(
+    response.headers.get(header),
+    expected,
+    `Value for header ${header} did not match`,
+  );
+}

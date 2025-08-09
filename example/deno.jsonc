@@ -2,7 +2,7 @@
   "license": "MIT",
   "imports": {
     "@preact/signals": "npm:@preact/signals@^2.2.1",
-    "rex": "jsr:@silvo38/rex@^0.0.16",
+    "rex": "jsr:@silvo38/rex@^0.0.17",
     "preact": "npm:preact@^10.26.9",
     "preact-render-to-string": "npm:preact-render-to-string@^6.5.13",
     "tailwindcss": "npm:tailwindcss@^4.1.11",

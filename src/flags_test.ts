@@ -20,11 +20,13 @@ describe("Built-in flags", () => {
     assertStrictEquals(flags.isDev.get(), true);
     assertStrictEquals(flags.port.get(), 8000);
     assertStrictEquals(flags.cacheAssets.get(), false);
+    assertStrictEquals(flags.assetVersion.get().length, 10);
   });
 
   it("prod defaults", () => {
     assertStrictEquals(flags.isDev.get(), false);
     assertStrictEquals(flags.port.get(), 8000);
     assertStrictEquals(flags.cacheAssets.get(), true);
+    assertStrictEquals(flags.assetVersion.get().length, 10);
   });
 });

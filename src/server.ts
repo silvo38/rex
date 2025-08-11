@@ -27,6 +27,14 @@ export class Server {
     return this;
   }
 
+  /** Allows adding a collection of assets in one go. */
+  addAssets(assets: Record<string, Asset>): Server {
+    for (const asset of Object.values(assets)) {
+      this.router.add(asset);
+    }
+    return this;
+  }
+
   /** Defines multiple new routes. */
   addHandlers(handlers: Iterable<Handler>): Server {
     for (const handler of handlers) {

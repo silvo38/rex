@@ -12,6 +12,7 @@ import { RexRequest } from "./request.ts";
 import { ContentType } from "./content_type.ts";
 import { BoolFlag, Flag } from "./flag.ts";
 import { cacheAssets } from "./flags.ts";
+import { Asset } from "@silvo38/rex";
 
 describe("Server", () => {
   let server: Server;
@@ -106,5 +107,25 @@ describe("Server", () => {
     Flag.getEnvVar = () => "bar";
     new BoolFlag("FOO");
     new Server({ validateFlags: false });
+  });
+
+  it("can install a collection of assets", async () => {
+    const assets = {
+      foo: new Asset({ route: "/foo", path: "./src/testdata/hello.html" }),
+      bar: new Asset({ route: "/bar", path: "./src/testdata/hello.html" }),
+    };
+    server.addAssets(assets);
+
+    const response1 = await server.handle(
+      new Request("http://example.com/foo"),
+    );
+    const response2 = await server.handle(
+      new Request("http://example.com/foo"),
+    );
+
+    assertOk(response1);
+    assertContentType(response1, ContentType.Html);
+    assertOk(response2);
+    assertContentType(response2, ContentType.Html);
   });
 });

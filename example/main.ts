@@ -1,17 +1,13 @@
 import { Server } from "rex";
 import { HomePage } from "./pages/HomePage.tsx";
 import { SayHelloHandler } from "./rpcs/SayHelloHandler.ts";
+import { assets } from "./src/assets.ts";
 
 const server = new Server()
   .addHandler(new HomePage())
   .addHandler(new SayHelloHandler())
-  // Serve the icons directory under /icons.
-  .serveDirectory("/icons/*", "static/icons")
-  // Serve the generated CSS file as /styles.css.
-  .serveFile("/styles.css", "dist/styles.css")
-  // Serve the bundled JS file (and sourcemap).
-  .serveFile("/app.js", "dist/app.js")
-  .serveFile("/app.js.map", "dist/app.js.map");
+  // Serve all static assets.
+  .addAssets(assets);
 
 // Start the Deno HTTP server, and forward all requests to your Rex server.
 Deno.serve((request) => server.handle(request));

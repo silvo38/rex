@@ -1,5 +1,5 @@
 import { type ContentType, inferContentType } from "./content_type.ts";
-import { cacheAssets } from "./flags.ts";
+import { assetVersion, cacheAssets } from "./flags.ts";
 import type { Handler } from "./handler.ts";
 import { Method } from "./method.ts";
 import type { RexRequest } from "./request.ts";
@@ -48,6 +48,18 @@ export class Asset implements Handler {
       response.setCacheControl(cacheControl);
     }
     return response;
+  }
+
+  /**
+   * Returns the URL to access this asset. Automatically adds the version query
+   * parameter if caching is enabled.
+   */
+  url(): string {
+    if (cacheAssets.get()) {
+      return this.route + "?v=" + assetVersion.get();
+    } else {
+      return this.route;
+    }
   }
 }
 

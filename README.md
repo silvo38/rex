@@ -87,6 +87,24 @@ server
   .serveDirectory("/fonts", "static/fonts");
 ```
 
+### Type-safe assets
+
+You can construct a collection of `Asset` objects, and install all of them in
+one go. This allows compile-time checking that the asset paths in your app are
+correct.
+
+```tsx
+const assets = {
+  logo: new Asset({ route: "/logo.svg", path: "./static/logo.svg" }),
+  favicon: new Asset({ route: "/favicon.png", path: "./static/favicon.png" }),
+};
+
+server.addAssets(assets);
+
+// Elsewhere in your code base:
+<img src={assets.logo.url()} />;
+```
+
 ## Rendering HTML
 
 Rex uses Preact to render JSX components as HTML. For this, define a subclass of
@@ -189,6 +207,11 @@ variables all start with the prefix `REX_`. Here is a list:
 - `port (REX_PORT)`: the port to listen on, defaults to 8000.
 - `cacheAssets (REX_CACHE_ASSETS)`: whether to set the Cache-Control header
   automatically on served assets. Defaults to true in prod only.
+- `assetVersion (REX_ASSET_VERSION)`: probably best not to touch this. By
+  default it will generate a random string to use as the "version number" for
+  all assets served by this server. If you restart the server you will get a new
+  version. Used in combination with `REX_CACHE_ASSETS` to ensure that assets are
+  cached forever, until the next time the server is updated.
 
 ## Optional/recommended dependencies
 

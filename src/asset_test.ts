@@ -5,7 +5,9 @@ import { assertContentType, assertOk } from "./testing/assert.ts";
 import { Header } from "./header.ts";
 import { ContentType } from "./content_type.ts";
 import { testHandler } from "./testing/test_server.ts";
-import { cacheAssets } from "./flags.ts";
+import { assetVersion, cacheAssets } from "./flags.ts";
+
+const HELLO_HTML = "./src/testdata/hello.html";
 
 describe("Asset", () => {
   beforeEach(() => {
@@ -39,12 +41,25 @@ describe("Asset", () => {
     const response = await testHandler(
       new Asset({
         route: "/abc",
-        path: "./src/testdata/hello.html",
+        path: HELLO_HTML,
       }),
       "/abc",
     );
     assertOk(response);
     assertContentType(response, ContentType.Html);
+  });
+
+  it("url() returns the route when caching is disabled", () => {
+    cacheAssets.setValueForTest(false);
+    const asset = new Asset({ route: "/abc", path: HELLO_HTML });
+    assertStrictEquals(asset.url(), "/abc");
+  });
+
+  it("url() returns the versioned URL when caching is enabled", () => {
+    assetVersion.setValueForTest("asdfasdf");
+    cacheAssets.setValueForTest(true);
+    const asset = new Asset({ route: "/abc", path: HELLO_HTML });
+    assertStrictEquals(asset.url(), "/abc?v=asdfasdf");
   });
 });
 

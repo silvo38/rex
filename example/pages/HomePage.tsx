@@ -1,6 +1,7 @@
 import { type RexRequest, StringFlag } from "rex";
 import { ExampleBasePage } from "./ExampleBasePage.tsx";
 import { CounterIsland } from "../client/Counter.tsx";
+import { assets } from "../src/assets.ts";
 
 // Define a flag, whose value is specified in the .env file.
 const myNameFlag = new StringFlag("MY_NAME", "Default Name");
@@ -28,7 +29,7 @@ export class HomePage extends ExampleBasePage<HomePageData> {
         {/* You can use Tailwind classes here. */}
         <h1 class="text-center text-5xl">Rex Example Server</h1>
 
-        <img src="/icons/dog.png" />
+        <img src={assets.dogIcon.url()} />
 
         <p>Hi, {data.name}</p>
 

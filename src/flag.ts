@@ -75,6 +75,17 @@ export class StringFlag extends Flag<string> {
   }
 }
 
+/** An int flag. */
+export class IntFlag extends Flag<number> {
+  protected override parse(rawValue: string): number {
+    const value = Number(rawValue);
+    if (Number.isNaN(value) || !Number.isInteger(value)) {
+      throw new Error(`Invalid int value [${rawValue}] for flag ${this.name}`);
+    }
+    return value;
+  }
+}
+
 /**
  * Eagerly validates all flags, by running the `get` method.
  *

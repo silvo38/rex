@@ -1,5 +1,5 @@
 import { beforeEach, describe, it } from "@std/testing/bdd";
-import { BoolFlag, Flag, StringFlag } from "./flag.ts";
+import { BoolFlag, Flag, IntFlag, StringFlag } from "./flag.ts";
 import { assertStrictEquals, assertThrows } from "@std/assert";
 import { validateFlags } from "./mod.ts";
 
@@ -25,26 +25,62 @@ describe("Flag", () => {
     assertStrictEquals(flag.get(), "bar");
   });
 
-  it("BoolFlag can return true", () => {
-    const flag = new BoolFlag("FOO");
-    fakeEnv.set("FOO", "true");
-    assertStrictEquals(flag.get(), true);
+  describe("BoolFlag", () => {
+    it("can return true", () => {
+      const flag = new BoolFlag("FOO");
+      fakeEnv.set("FOO", "true");
+      assertStrictEquals(flag.get(), true);
+    });
+
+    it("can return false", () => {
+      const flag = new BoolFlag("FOO");
+      fakeEnv.set("FOO", "false");
+      assertStrictEquals(flag.get(), false);
+    });
+
+    it("throws if flag value is invalid", () => {
+      const flag = new BoolFlag("FOO");
+      fakeEnv.set("FOO", "bar");
+      assertThrows(
+        () => flag.get(),
+        Error,
+        "Invalid boolean value [bar] for flag FOO",
+      );
+    });
   });
 
-  it("BoolFlag can return false", () => {
-    const flag = new BoolFlag("FOO");
-    fakeEnv.set("FOO", "false");
-    assertStrictEquals(flag.get(), false);
-  });
+  describe("IntFlag", () => {
+    it("can return positive int", () => {
+      const flag = new IntFlag("FOO");
+      fakeEnv.set("FOO", "123");
+      assertStrictEquals(flag.get(), 123);
+    });
 
-  it("BoolFlag throws if flag value is invalid", () => {
-    const flag = new BoolFlag("FOO");
-    fakeEnv.set("FOO", "bar");
-    assertThrows(
-      () => flag.get(),
-      Error,
-      "Invalid boolean value [bar] for flag FOO",
-    );
+    it("can return negative int", () => {
+      const flag = new IntFlag("FOO");
+      fakeEnv.set("FOO", "-123");
+      assertStrictEquals(flag.get(), -123);
+    });
+
+    it("throws if flag value is invalid", () => {
+      const flag = new IntFlag("FOO");
+      fakeEnv.set("FOO", "bar");
+      assertThrows(
+        () => flag.get(),
+        Error,
+        "Invalid int value [bar] for flag FOO",
+      );
+    });
+
+    it("throws if number is floating point", () => {
+      const flag = new IntFlag("FOO");
+      fakeEnv.set("FOO", "12.34");
+      assertThrows(
+        () => flag.get(),
+        Error,
+        "Invalid int value [12.34] for flag FOO",
+      );
+    });
   });
 
   it("validateFlags throws error if a flag was missing", () => {

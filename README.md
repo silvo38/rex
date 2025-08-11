@@ -144,13 +144,16 @@ There are some built-in subclasses for common primitives, or you can define your
 own.
 
 ```ts
-import { BoolFlag, StringFlag, validateFlags } from "rex";
+import { BoolFlag, IntFlag, StringFlag, validateFlags } from "rex";
 
 // Whether to enable debugging. Defaults to true.
 export const debugFlag = new BoolFlag("DEBUG", false);
 
 // The filename of the database. Required.
 export const databaseFlag = new StringFlag("DATABASE");
+
+// Which port to listen on.
+export const portFlag = new IntFlag("PORT", 8000);
 
 if (debugFlag.get()) {
   // ...

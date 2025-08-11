@@ -14,6 +14,22 @@ export class RexResponse extends Response {
     this.headers.set(Header.ContentType, contentType);
     return this;
   }
+
+  /** Returns the value of the Cache-Control header. */
+  getCacheControl(): string | null {
+    return this.headers.get(Header.CacheControl);
+  }
+
+  /** Sets the Cache-Control header. */
+  setCacheControl(cacheControl: string): RexResponse {
+    this.headers.set(Header.CacheControl, cacheControl);
+    return this;
+  }
+
+  /** Sets the Cache-Control header to cache for one year. */
+  setCacheable(): RexResponse {
+    return this.setCacheControl("max-age=31536000, immutable");
+  }
 }
 
 /** Helpers for constructing standard HTTP responses. */

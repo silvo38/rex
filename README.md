@@ -152,8 +152,8 @@ export const debugFlag = new BoolFlag("DEBUG", false);
 // The filename of the database. Required.
 export const databaseFlag = new StringFlag("DATABASE");
 
-// Which port to listen on.
-export const portFlag = new IntFlag("PORT", 8000);
+// Which port to listen on. (Uses a default value provider function.)
+export const portFlag = new IntFlag("PORT", () => computePortInAComplexWay());
 
 if (debugFlag.get()) {
   // ...
@@ -178,6 +178,18 @@ deno run --allow-env --env-file=dev.env src/main.ts
 For testing, it is recommended that you specify the value of the flag in your
 test using `flag.setValueForTest(...)` rather than supplying a `.env` file
 (although the latter is possible).
+
+### Built-in flags
+
+The file `flags.ts` defines some built-in flags that are used by Rex. These env
+variables all start with the prefix `REX_`. Here is a list:
+
+- `isDev (REX_DEV)`: whether this is a dev server or prod (default). Generally
+  this should not be used directly, instead it is used to compute the default
+  value for other flags.
+- `port (REX_PORT)`: the port to listen on, defaults to 8000.
+- `cacheAssets (REX_CACHE_ASSETS)`: whether to set the Cache-Control header
+  automatically on served assets. Defaults to true in prod only.
 
 ## Optional/recommended dependencies
 

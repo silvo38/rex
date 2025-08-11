@@ -25,6 +25,18 @@ describe("Flag", () => {
     assertStrictEquals(flag.get(), "bar");
   });
 
+  it("can supply a default value provider", () => {
+    let timesCalled = 0;
+    const defaultFn = () => {
+      return "bar" + (timesCalled++);
+    };
+    const flag = new StringFlag("FOO", defaultFn);
+    assertStrictEquals(flag.get(), "bar0");
+    assertStrictEquals(timesCalled, 1);
+    assertStrictEquals(flag.get(), "bar0");
+    assertStrictEquals(timesCalled, 1);
+  });
+
   describe("BoolFlag", () => {
     it("can return true", () => {
       const flag = new BoolFlag("FOO");

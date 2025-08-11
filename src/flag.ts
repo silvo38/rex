@@ -14,9 +14,10 @@ export abstract class Flag<T> {
     protected readonly name: string,
     /**
      * An optional default value for the flag. If not provided, the flag is
-     * required.
+     * required. You can also supply a function which will return the default
+     * value.
      */
-    protected readonly defaultValue?: T,
+    protected readonly defaultValue?: T | (() => T),
   ) {
     unvalidatedFlags.push(this);
   }
@@ -35,11 +36,23 @@ export abstract class Flag<T> {
     this.value = value;
   }
 
+  /**
+   * For use in tests only. Resets the stored value so that it can be computed
+   * again.
+   */
+  resetForTest() {
+    this.value = undefined;
+  }
+
   private computeValue(): T {
     const rawValue = Flag.getEnvVar(this.name);
     if (rawValue === undefined) {
       if (this.defaultValue !== undefined) {
-        return this.defaultValue;
+        if (typeof this.defaultValue === "function") {
+          return (this.defaultValue as (() => T))();
+        } else {
+          return this.defaultValue;
+        }
       } else {
         throw new Error(`Required flag is missing from env: ${this.name}`);
       }

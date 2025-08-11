@@ -1,15 +1,20 @@
-import { describe, it } from "@std/testing/bdd";
-import { StaticDirectoryHandler, StaticFileHandler } from "./static.ts";
+import { beforeEach, describe, it } from "@std/testing/bdd";
+import { Asset, AssetFolder } from "./asset.ts";
 import { assertStrictEquals, assertThrows } from "@std/assert";
 import { assertContentType, assertOk } from "./testing/assert.ts";
 import { Header } from "./header.ts";
 import { ContentType } from "./content_type.ts";
 import { testHandler } from "./testing/test_server.ts";
+import { cacheAssets } from "./flags.ts";
 
-describe("StaticFileHandler", () => {
-  it("returns the file on disc", async () => {
+describe("Asset", () => {
+  beforeEach(() => {
+    cacheAssets.setValueForTest(false);
+  });
+
+  it("returns the file on disk", async () => {
     const response = await testHandler(
-      new StaticFileHandler({
+      new Asset({
         route: "/abc",
         path: "./src/testdata/hello.txt",
         contentType: "content-type",
@@ -23,7 +28,7 @@ describe("StaticFileHandler", () => {
 
   it("checks file existence on creation", () => {
     assertThrows(() =>
-      new StaticFileHandler({
+      new Asset({
         route: "/abc",
         path: "./does-not-exist",
         contentType: "whatever",
@@ -32,7 +37,7 @@ describe("StaticFileHandler", () => {
 
   it("infers content type", async () => {
     const response = await testHandler(
-      new StaticFileHandler({
+      new Asset({
         route: "/abc",
         path: "./src/testdata/hello.html",
       }),
@@ -43,9 +48,13 @@ describe("StaticFileHandler", () => {
   });
 });
 
-describe("StaticDirectoryHandler", () => {
+describe("AssetFolder", () => {
+  beforeEach(() => {
+    cacheAssets.setValueForTest(false);
+  });
+
   it("can serve multiple files", async () => {
-    const handler = new StaticDirectoryHandler({
+    const handler = new AssetFolder({
       route: "/abc/*",
       directory: "./src/testdata",
     });
@@ -67,7 +76,7 @@ describe("StaticDirectoryHandler", () => {
 
   it("checks directory existence on creation", () => {
     assertThrows(() =>
-      new StaticDirectoryHandler({
+      new AssetFolder({
         route: "/abc",
         directory: "./does-not-exist",
       }), Deno.errors.NotFound);

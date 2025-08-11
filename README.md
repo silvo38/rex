@@ -54,21 +54,21 @@ The basic API of Rex is the `Handler` interface. This is an object that has a
 
 ## Serving static assets
 
-You can serve an entire directory of files using `StaticDirectoryHandler`, or a
-single file using `StaticFileHandler`, like so:
+You can serve an entire directory of files using `AssetFolder`, or a single file
+using `Asset`, like so:
 
 ```ts
-import { StaticDirectoryHandler, StaticFileHandler } from "rex";
+import { Asset, AssetFolder } from "rex";
 
 const server = new Server()
   .addHandler(
-    new StaticFileHandler({
+    new Asset({
       route: "/logo.svg",
       path: "static/logo.svg",
     }),
   )
   .addHandler(
-    new StaticDirectoryHandler({
+    new AssetFolder({
       route: "/fonts/*",
       directory: "static/fonts",
     }),
@@ -76,9 +76,8 @@ const server = new Server()
 ```
 
 Be sure to add handlers for more specific routes earlier (e.g. if you wanted to
-serve a different file at `/fonts/Roboto.ttf`, make sure you add a
-`StaticFileHandler` for that route first, before adding a handler for
-`/fonts/*`).
+serve a different file at `/fonts/Roboto.ttf`, make sure you add a `Asset` for
+that route first, before adding a handler for `/fonts/*`).
 
 For convenience, you can use the helper methods instead:
 
@@ -234,7 +233,7 @@ tailwind({
 ```
 
 This would generate `dist/styles.css`, which you would load in your page. Don't
-forget to serve the CSS file using a `StaticFileHandler` or `serveFile`.
+forget to serve the CSS file using a `Asset` or `serveFile`.
 
 ### Bundling and serving client-side JavaScript
 

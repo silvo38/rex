@@ -2,9 +2,8 @@ import { Router } from "./router.ts";
 import { Responses } from "./response.ts";
 import { RexRequest } from "./request.ts";
 import type { Handler } from "./handler.ts";
-import { StaticFileHandler } from "./static.ts";
+import { Asset, AssetFolder } from "./asset.ts";
 import { validateFlags } from "./flag.ts";
-import { StaticDirectoryHandler } from "./static.ts";
 
 /**
  * Main server entry point. Create routes with handlers using the `setRoutes`
@@ -13,11 +12,13 @@ import { StaticDirectoryHandler } from "./static.ts";
 export class Server {
   private readonly router: Router;
 
-  constructor() {
+  constructor(opts?: { validateFlags?: boolean }) {
     this.router = new Router();
 
     // Validate flags as soon as possible.
-    validateFlags();
+    if (opts?.validateFlags ?? true) {
+      validateFlags();
+    }
   }
 
   /** Defines a new route. */
@@ -36,7 +37,7 @@ export class Server {
 
   /** Serves the file with the given path on disk at the specified route. */
   serveFile(route: string, path: string): Server {
-    this.addHandler(new StaticFileHandler({ route, path }));
+    this.addHandler(new Asset({ route, path }));
     return this;
   }
 
@@ -45,7 +46,7 @@ export class Server {
    * Supply a route like `/foo/bar/*` and a directory like `foo/bar`.
    */
   serveDirectory(route: string, directory: string): Server {
-    this.addHandler(new StaticDirectoryHandler({ route, directory }));
+    this.addHandler(new AssetFolder({ route, directory }));
     return this;
   }
 

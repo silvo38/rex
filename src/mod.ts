@@ -1,4 +1,8 @@
 export * from "./client/mod.ts";
+
+export * as flags from "./flags.ts";
+
+export * from "./asset.ts";
 export * from "./content_type.ts";
 export * from "./flag.ts";
 export * from "./handler.ts";
@@ -11,5 +15,4 @@ export * from "./response.ts";
 export * from "./router.ts";
 export * from "./rpc_handler.ts";
 export * from "./server.ts";
-export * from "./static.ts";
 export * from "./status.ts";

@@ -14,7 +14,7 @@ export function bindRequest(
   handler: Handler,
   request: Request | string,
 ): RexRequest {
-  const match = new Server()
+  const match = new Server({ validateFlags: false })
     .addHandler(handler)
     .matchHandler(toRequest(request));
   assert(match, `Handler did not match request: ${request}`);

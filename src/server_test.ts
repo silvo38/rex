@@ -11,12 +11,14 @@ import {
 import { RexRequest } from "./request.ts";
 import { ContentType } from "./content_type.ts";
 import { BoolFlag, Flag } from "./flag.ts";
+import { cacheAssets } from "./flags.ts";
 
 describe("Server", () => {
   let server: Server;
 
   beforeEach(() => {
-    server = new Server();
+    server = new Server({ validateFlags: false });
+    cacheAssets.setValueForTest(false);
   });
 
   it("invokes correct handler", async () => {
@@ -96,7 +98,13 @@ describe("Server", () => {
     assertThrows(
       () => new Server(),
       Error,
-      "Invalid boolean value [bar] for flag FOO",
+      "Invalid boolean value [bar] for flag",
     );
+  });
+
+  it("does not validates flags in constructor if told not to", () => {
+    Flag.getEnvVar = () => "bar";
+    new BoolFlag("FOO");
+    new Server({ validateFlags: false });
   });
 });

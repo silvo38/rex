@@ -1,6 +1,7 @@
 /** Common HTTP headers. */
 export enum Header {
+  CacheControl = "cache-control",
   ContentType = "content-type",
   Location = "location",
-  CacheControl = "cache-control",
+  SetCookie = "set-cookie",
 }

@@ -23,4 +23,12 @@ describe("RexResponse", () => {
     assertStrictEquals(response.getCacheControl(), "asdf");
     assertHeader(response, Header.CacheControl, "asdf");
   });
+
+  it("can set the SESSION cookie", () => {
+    const response = new RexResponse();
+    assertStrictEquals(response.getSessionCookie(), null);
+    response.setSessionCookie("asdf");
+    assertStrictEquals(response.getSessionCookie(), "asdf");
+    assertHeader(response, Header.SetCookie, "SESSION=asdf");
+  });
 });

@@ -7,15 +7,23 @@
     "jsr:@std/cli@^1.0.21": "1.0.21",
     "jsr:@std/data-structures@^1.0.8": "1.0.9",
     "jsr:@std/encoding@1": "1.0.10",
+    "jsr:@std/encoding@^1.0.10": "1.0.10",
     "jsr:@std/fmt@1": "1.0.8",
+    "jsr:@std/fmt@^1.0.8": "1.0.8",
     "jsr:@std/fs@1": "1.0.19",
     "jsr:@std/fs@^1.0.18": "1.0.19",
+    "jsr:@std/fs@^1.0.19": "1.0.19",
+    "jsr:@std/html@^1.0.4": "1.0.4",
+    "jsr:@std/http@^1.0.20": "1.0.20",
     "jsr:@std/internal@^1.0.6": "1.0.9",
     "jsr:@std/internal@^1.0.8": "1.0.9",
     "jsr:@std/internal@^1.0.9": "1.0.9",
+    "jsr:@std/media-types@^1.1.0": "1.1.0",
+    "jsr:@std/net@^1.0.4": "1.0.5",
     "jsr:@std/path@1": "1.1.1",
     "jsr:@std/path@^1.1.0": "1.1.1",
     "jsr:@std/path@^1.1.1": "1.1.1",
+    "jsr:@std/streams@^1.0.10": "1.0.11",
     "jsr:@std/testing@^1.0.11": "1.0.14",
     "npm:preact-render-to-string@^6.5.13": "6.5.13_preact@10.26.9",
     "npm:preact@^10.26.4": "10.26.9"
@@ -30,8 +38,8 @@
     "@denosaurs/plug@1.1.0": {
       "integrity": "eb2f0b7546c7bca2000d8b0282c54d50d91cf6d75cb26a80df25a6de8c4bc044",
       "dependencies": [
-        "jsr:@std/encoding",
-        "jsr:@std/fmt",
+        "jsr:@std/encoding@1",
+        "jsr:@std/fmt@1",
         "jsr:@std/fs@1",
         "jsr:@std/path@1"
       ]
@@ -61,14 +69,40 @@
         "jsr:@std/path@^1.1.1"
       ]
     },
+    "@std/html@1.0.4": {
+      "integrity": "eff3497c08164e6ada49b7f81a28b5108087033823153d065e3f89467dd3d50e"
+    },
+    "@std/http@1.0.20": {
+      "integrity": "b5cc33fc001bccce65ed4c51815668c9891c69ccd908295997e983d8f56070a1",
+      "dependencies": [
+        "jsr:@std/cli",
+        "jsr:@std/encoding@^1.0.10",
+        "jsr:@std/fmt@^1.0.8",
+        "jsr:@std/fs@^1.0.19",
+        "jsr:@std/html",
+        "jsr:@std/media-types",
+        "jsr:@std/net",
+        "jsr:@std/path@^1.1.1",
+        "jsr:@std/streams"
+      ]
+    },
     "@std/internal@1.0.9": {
       "integrity": "bdfb97f83e4db7a13e8faab26fb1958d1b80cc64366501af78a0aee151696eb8"
+    },
+    "@std/media-types@1.1.0": {
+      "integrity": "c9d093f0c05c3512932b330e3cc1fe1d627b301db33a4c2c2185c02471d6eaa4"
+    },
+    "@std/net@1.0.5": {
+      "integrity": "b759d8c5e17d997e164af6379d57764668c6714f30109685eec0fd5e194d501a"
     },
     "@std/path@1.1.1": {
       "integrity": "fe00026bd3a7e6a27f73709b83c607798be40e20c81dde655ce34052fd82ec76",
       "dependencies": [
         "jsr:@std/internal@^1.0.9"
       ]
+    },
+    "@std/streams@1.0.11": {
+      "integrity": "db583d27e28d133f389f1eec318cffdf4998305e5134c1d4b1c56b361cee6018"
     },
     "@std/testing@1.0.14": {
       "integrity": "144b3737105b9071cb50c957681f58a1b8ec0f3e5b19ad830f401c5fa931e8f0",
@@ -97,6 +131,7 @@
       "jsr:@b-fuze/deno-dom@~0.1.56",
       "jsr:@std/assert@^1.0.13",
       "jsr:@std/cli@^1.0.21",
+      "jsr:@std/http@^1.0.20",
       "jsr:@std/testing@^1.0.11",
       "npm:preact-render-to-string@^6.5.13",
       "npm:preact@^10.26.4"
